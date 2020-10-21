@@ -12,7 +12,7 @@
 
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         foreach ($dbh->query("SELECT * FROM calendar") as $row) {
-            echo '<div>'.$row[0].'</div>';
+            echo '<div>'.$row[0].' '.$row[1].'</div>';
           }
 
         } catch (PDOException $e) {
