@@ -7,11 +7,13 @@ session_start();
 
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       if (isset($_POST['username']) and isset($_POST['password']) ){
-        foreach ($dbh->query("loginUser(\"".$_POST['username']."\",\"".$_POST['password']."\")") as $row) {
-            $_SESSION["loggedIn"] = true;
-            $_SESSION["userID"] = $row[0];
-            header("Location: calendar.php");
-            return;
+        foreach ($dbh->query("SELECT loginUser(\"".$_POST['username']."\",\"".$_POST['password']."\")") as $row) {
+            if (!is_null($row[0])) {
+              $_SESSION["loggedIn"] = true;
+              $_SESSION["userID"] = $row[0];
+              header("Location: calendar.php");
+              return;
+            }
           }
         header("Location: login.html");
       }
