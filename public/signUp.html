@@ -4,15 +4,27 @@
   </head>
   <body>
     <form action="signUp.php" method="post">
-      <input type="text" name="username" placeholder="Username">
+      <div class="RowUsername">
+        <input type="text" name="username" placeholder="Username">
+      </div>
 
-      <input type="password" name="password" placeholder="Password">
+      <div class="RowPassOne">
+        <input type="password" name="password" placeholder="Password">
+      </div>
 
-      <select name="timezone" ID="timezone">
-        <option value="EST"> EST </option>
-        <option value="PST"> PST </option>
+      <div class="RowPassTwo">
+        <input type="password" name="passConfirm" placeholder="Confirm Password">
+      </div>
 
-      </select>
+      <div class="TimezoneRow">
+
+        <select name="timezone" ID="timezone">
+          <option value="EST"> EST </option>
+          <option value="PST"> PST </option>
+
+        </select>
+
+      </div>
 
       <input type="submit" name="signUp" value="Sign Up">
     </form>
