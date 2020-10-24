@@ -1,32 +1,29 @@
 <html>
-    <head>
-      <title>Thymer - Sign Up</title>
-  </head>
-  <body>
-    <form action="signUp.php" method="post">
-      <div class="RowUsername">
-        <input type="text" name="username" placeholder="Username">
-      </div>
 
-      <div class="RowPassOne">
-        <input type="password" name="password" placeholder="Password">
-      </div>
+<head>
+  <title>Thymer - Sign Up</title>
+  <link rel="stylesheet" href="./css/master.css">
+</head>
 
-      <div class="RowPassTwo">
-        <input type="password" name="passConfirm" placeholder="Confirm Password">
-      </div>
+<body>
 
-      <div class="TimezoneRow">
-
-        <select name="timezone" ID="timezone">
-          <option value="EST"> EST </option>
-          <option value="PST"> PST </option>
-
-        </select>
-
-      </div>
-
+  <form action="signUp.php" method="post">
+    <div class="userText">
+      <input type="text" name="username" placeholder="Username">
+      <input type="password" name="password" placeholder="Password">
+      <input type="password" name="passConfirm" placeholder="Confirm Password">
+      <select name="timezone" ID="timezone">
+        <option value="EST"> EST </option>
+        <option value="PST"> PST </option>
+      </select>
+    </div>
+    
+    <div class="lsButtons">
       <input type="submit" name="signUp" value="Sign Up">
-    </form>
-  </body>
+      <a href="index.html">Log in.</a>
+    </div>
+  </form>
+
+</body>
+
 </html>

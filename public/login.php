@@ -18,11 +18,9 @@ session_start();
         header("Location: login.html");
       }
 
-
       } catch (PDOException $e) {
         print "\nError! " . $e->getMessage()."<br/>";
         die();
       }
-
-
+      
  ?>

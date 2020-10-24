@@ -1,0 +1,15 @@
+.lsButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5em;
+}
+
+.userText input {
+  display: block;
+  width: 100%;
+}
+
+form {
+  display: inline-block;
+  width: 235px;
+}

@@ -1,23 +1,24 @@
 <html>
-    <head>
-      <title>Thymer -     login</title>
-  </head>
-  <body>
-    <form action="login.php" method="post">
-      <div class="RowUsername">
-        <input type="text" name="username" placeholder="Username">
-      </div>
 
-      <div class="RowPassOne">
-        <input type="password" name="password" placeholder="Password">
-      </div>
+<head>
+  <title>Thymer - login</title>
+  <link rel="stylesheet" href="./css/master.css">
+</head>
+
+<body>
+
+  <form action="login.php" method="post">
+    <div class="userText">
+      <input type="text" name="username" placeholder="Username">
+      <input type="password" name="password" placeholder="Password">
+    </div>
+
+    <div class="lsButtons">
       <input type="submit" name="logIn" value="Log In">
+      <a href="signUp.html">Sign Up</a>
+    </div>
+  </form>
 
-      <section>
-        <div class="SignUp">
-          <a href="signUp.html">Sign Up</a>
-        </div>
-      </section>
-    </form>
-  </body>
+</body>
+
 </html>
