@@ -13,3 +13,13 @@ form {
   display: inline-block;
   width: 235px;
 }
+
+.timeblockDevDisplay *{
+  display: inline;
+  margin: 0.5em;
+}
+
+.timeblockDevDisplay {
+  display: block;
+  width: 100%;
+}

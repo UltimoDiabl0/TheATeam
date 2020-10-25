@@ -17,7 +17,7 @@ session_start();
         foreach ($userHandler->fetch(PDO::FETCH_ASSOC) as $row) {
             if (!is_null($row[0])) {
               $_SESSION["loggedIn"] = true;
-              $_SESSION["userID"] = $row[0];
+              $_SESSION["username"] = $row;
               header("Location: calendar.php");
               return;
             }
