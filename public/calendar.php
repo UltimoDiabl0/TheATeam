@@ -10,7 +10,7 @@
   </head>
 
   <body>
-
+    <a href="groupList.php" value="To Group Page">
     <?php
 
         try{
