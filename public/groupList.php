@@ -5,7 +5,7 @@
 <html>
 
   <head>
-    <title>Thymer - Groups</title>
+    <title>Thymer - Group</title>
     <link rel="stylesheet" href="./css/master.css">
   </head>
 
@@ -19,7 +19,11 @@
 
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           if (isset($_SESSION['username'])){
-            echo "<form action='createGroup.php' method='post'>";
+            echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
+              echo "<input type='submit' value='Go Back'>";
+            echo "</form>";
+
+            echo "<form action='createGroup.php' method='post' class='timeblockDevDisplay' >";
               echo "<input type='submit' value='Create Group'>";
             echo "</form>";
 
@@ -36,14 +40,19 @@
 
             }
 
-            echo "<p>This is ".$_SESSION['username']."'s Invites </p>";
+            echo "<p>This is ".$_SESSION['username']."'s Groups </p>";
             foreach ($dbh->query('CALL getGroups("'.$_SESSION['username'].'")') as $row) {
-                echo "<form action='leaveGroup.php' method='post' class='timeblockDevDisplay' >";
+                echo "<form action='groupView.php' method='post' class='timeblockDevDisplay' >";
 
                   echo "<p>GroupID: $row[0],  Current User: $row[1], isHost: $row[2], groupName: $row[3] groupType: $row[4] groupDesc: $row[5]</p>";
                   echo "<input type='hidden' value=$row[0] name='groupID'>";
-                  echo "<input type='submit' value='Leave Group'>";
+                  echo "<input type='hidden' value=$row[2] name='isHost'>";
+                  echo "<input type='submit' value='Go To Group'>";
 
+                echo "</form>";
+                echo "<form action='leaveGroup.php' method='post' class='timeblockDevDisplay' >";
+                  echo "<input type='hidden' value=$row[0] name='groupID'>";
+                  echo "<input type='submit' value='Leave Group'>";
                 echo "</form>";
 
             }

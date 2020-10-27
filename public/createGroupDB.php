@@ -1,4 +1,7 @@
 <?php
+  session_start();
+ ?>
+<?php
 
 try{
   $config = parse_ini_file("db.ini");
@@ -7,7 +10,12 @@ try{
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   if (isset($_SESSION['username'])){
 
-    $dbh->query("CALL createGroup('".$_POST['groupName']."','".$_POST['groupType']."','".$_POST['groupDesc']."','".$_SESSION['username']."')");
+    // Preventing SQL Injection via prepare statement, and escaping variables to use as plain text and not code
+    $userHandler = $dbh->prepare("CALL createGroup( :groupName, :groupType, :groupDesc, '".$_SESSION['username']."')");
+    $userHandler->bindParam(':groupName', $_POST['groupName']);
+    $userHandler->bindParam(':groupType', $_POST['groupType']);
+    $userHandler->bindParam(':groupDesc', $_POST['groupDesc']);
+    $userHandler->execute();
     header("Location: groupList.php");
 
   }

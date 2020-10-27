@@ -1,4 +1,5 @@
 <?php
+  session_start();
 
 try{
   $config = parse_ini_file("db.ini");
@@ -13,10 +14,6 @@ try{
       echo "<input type='text' name='groupDesc' placeholder='Group Description'>";
       echo "<input type='submit' value='Create Group'>";
     echo "</form>";
-
-
-    $dbh->query("CALL deleteFromGroup('".$_POST['groupID']."','".$_SESSION['username']."')");
-    header("Location: groupList.php");
 
   }
 
