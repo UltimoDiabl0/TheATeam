@@ -11,6 +11,10 @@
 
   <body>
     <a href="groupList.php">To Group Page</a>
+    <!--In the case you haven't added the logout function, we provided a place for it-->
+    <input type='submit' value='Logout'></input>
+    <!--Please put php here or wherever is more convinient.-->
+
     <?php
 
         try{
@@ -37,5 +41,16 @@
               die();
           }
      ?>
+
+     <div class="calendarStyle">
+       <section class="dayBlock"></section>
+       <section class="dayBlock"></section>
+       <section class="dayBlock"></section>
+       <section class="dayBlock"></section>
+       <section class="dayBlock"></section>
+       <section class="dayBlock"></section>
+       <section class="dayBlock"></section>
+     </div>
+
     </body>
 </html>

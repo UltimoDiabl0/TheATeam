@@ -24,6 +24,23 @@ form {
   width: 100%;
 }
 
-.dayBlock box {
-  
+.calendarStyle {
+  display: inline;
+  align-self: center;
+}
+
+.dayBlock {
+   display: inline-block;
+   width: 12.85%;
+   height: 270px;
+   background: #FFFFFF;
+   border: 1px solid black;
+}
+
+.dayBlockBegin .dayBlock {
+  margin-left: 5%;
+}
+
+.dayBlockEnd .dayBlock {
+  margin-right: 5%;
 }
