@@ -42,15 +42,24 @@
           }
      ?>
 
-     <div class="calendarStyle"> 
-       <section class="dayBlock"></section>
-       <section class="dayBlock"></section>
-       <section class="dayBlock"></section>
-       <section class="dayBlock"></section>
-       <section class="dayBlock"></section>
-       <section class="dayBlock"></section>
-       <section class="dayBlock"></section>
+     <div value="daysOfWeek" class="calendarStyle">
+       <section class="dayLabel">Sunday</section>
+       <section class="dayLabel">Monday</section>
+       <section class="dayLabel">Tuesday</section>
+       <section class="dayLabel">Wednesday</section>
+       <section class="dayLabel">Thursday</section>
+       <section class="dayLabel">Friday</section>
+       <section class="dayLabel">Saturday</section>
      </div>
-
+     <div class="calendarStyle">
+       <section value="0" class="dayBlock"></section>
+       <section value="1" class="dayBlock"></section>
+       <section value="2" class="dayBlock"></section>
+       <section value="3" class="dayBlock"></section>
+       <section value="4" class="dayBlock"></section>
+       <section value="5" class="dayBlock"></section>
+       <section value="6" class="dayBlock"></section>
+     </div>
+     <script src="scripts/calendar.js"></script>
     </body>
 </html>

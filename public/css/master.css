@@ -35,3 +35,12 @@ form {
    background: #FFFFFF;
    border: 1px solid black;
 }
+
+.dayLabel {
+  width: 12.85%;
+  text-align: center;
+}
+
+.timeBlockDisplay {
+
+}
