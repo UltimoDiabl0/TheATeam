@@ -25,27 +25,13 @@ form {
 }
 
 .calendarStyle {
-  /*width: 100%;
-  height: 272px;
-  display: inline;
-  align-self: center;
-  border: 1px solid black;*/
-  margin-left: 5%;
-  margin-right: 5%;
+  display: flex;
+  justify-content: center;
 }
 
 .dayBlock {
-   float: left;
-   width: 12.8571428571%;
+   width: 12.85%;
    height: 270px;
    background: #FFFFFF;
    border: 1px solid black;
-}
-
-.dayBlockBegin .dayBlock {
-  margin-left: 5%;
-}
-
-.dayBlockEnd .dayBlock {
-  margin-right: 5%;
 }
