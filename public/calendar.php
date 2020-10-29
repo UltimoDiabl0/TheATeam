@@ -42,7 +42,7 @@
           }
      ?>
 
-     <div class="calendarStyle">
+     <div class="calendarStyle"> 
        <section class="dayBlock"></section>
        <section class="dayBlock"></section>
        <section class="dayBlock"></section>
