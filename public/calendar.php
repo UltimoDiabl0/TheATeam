@@ -42,7 +42,7 @@
           }
      ?>
 
-     <div value="daysOfWeek" class="calendarStyle">
+     <div value="daysOfWeek" id="calendarStyle">
        <section class="dayLabel">Sunday</section>
        <section class="dayLabel">Monday</section>
        <section class="dayLabel">Tuesday</section>
@@ -51,7 +51,7 @@
        <section class="dayLabel">Friday</section>
        <section class="dayLabel">Saturday</section>
      </div>
-     <div class="calendarStyle">
+     <div id="calendarStyle" >
        <section value="0" class="dayBlock"></section>
        <section value="1" class="dayBlock"></section>
        <section value="2" class="dayBlock"></section>
