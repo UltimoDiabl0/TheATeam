@@ -23,6 +23,11 @@
                 $_SESSION['groupID'] = $_POST['groupID'];
                 $_SESSION['isHost'] = $_POST['isHost'];
             }
+
+            echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
+              echo "<input type='submit' value='Logout'>";
+            echo "</form>";
+
             echo "<form action='groupList.php' method='post'>";
               echo "<input type='submit' value='Go Back'>";
             echo "</form>";
@@ -56,6 +61,12 @@
 
 
           }
+
+
+          else{
+            header("Location: index.html");
+          }
+
 
           } catch (PDOException $e) {
               print "\nError! " . $e->getMessage()."<br/>";
