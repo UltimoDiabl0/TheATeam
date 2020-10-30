@@ -19,6 +19,11 @@
 
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           if (isset($_SESSION['username'])){
+
+            echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
+              echo "<input type='submit' value='Logout'>";
+            echo "</form>";
+
             echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
               echo "<input type='submit' value='Go Back'>";
             echo "</form>";
@@ -57,6 +62,10 @@
 
             }
 
+          }
+
+          else{
+            header("Location: index.html");
           }
 
           } catch (PDOException $e) {

@@ -19,6 +19,11 @@
 
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           if (isset($_SESSION['username'])){
+
+            echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
+              echo "<input type='submit' value='Logout'>";
+            echo "</form>";
+
             echo "<p>This is ".$_SESSION['username']."'s Timeblocks </p>";
             foreach ($dbh->query('CALL getTimeblocks("'.$_SESSION['username'].'")') as $row) {
                 echo "<form action='deleteTimeblock.php' method='post' class='timeblockDevDisplay' >";
@@ -31,6 +36,12 @@
 
             }
           }
+
+
+          else{
+            header("Location: index.html");
+          }
+
 
           } catch (PDOException $e) {
               print "\nError! " . $e->getMessage()."<br/>";

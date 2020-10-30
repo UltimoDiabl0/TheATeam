@@ -8,6 +8,14 @@ try{
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   if (isset($_SESSION['username'])){
 
+    echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
+      echo "<input type='submit' value='Logout'>";
+    echo "</form>";
+
+    echo "<form action='groupList.php' method='post'>";
+      echo "<input type='submit' value='Go Back'>";
+    echo "</form>";
+
     echo "<form action='createGroupDB.php' method='post'>";
       echo "<input type='text' name='groupName' placeholder='Group Name'>";
       echo "<input type='text' name='groupType' placeholder='Group Type'>";
@@ -15,6 +23,11 @@ try{
       echo "<input type='submit' value='Create Group'>";
     echo "</form>";
 
+  }
+
+
+  else{
+    header("Location: index.html");
   }
 
   } catch (PDOException $e) {
