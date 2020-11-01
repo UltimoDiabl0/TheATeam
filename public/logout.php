@@ -7,11 +7,7 @@ try{
 
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   if (isset($_SESSION['username'])){
-
-    $_SESSION["loggedIn"] = false;
-    $_SESSION["username"] = null;
-    $_SESSION['groupID'] = 0;
-    $_SESSION['isHost'] = 0;
+    session_destroy();
     header("Location: index.html");
     //echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
     //echo "<input type='submit' value='Logout'>";
