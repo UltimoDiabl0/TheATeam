@@ -27,7 +27,7 @@
             foreach ($dbh->query('CALL getTimeblocks("'.$_SESSION['username'].'")') as $row) {
                 echo "<form action='deleteTimeblock.php' method='post' class='timeblockDevDisplay' >";
 
-                  echo "<p>Timeblock ID: $row[0],  Start Time: $row[1], End Time: $row[2], Label: $row[3]</p>";
+                  echo "<p class='timeBlockDummy'>Timeblock ID: $row[0],  Start Time: $row[1], End Time: $row[2], Label: $row[3]</p>";
                   echo "<input type='hidden' value=$row[0] name='timeblockID'>";
                   echo "<input type='submit' value='Delete'>";
 
@@ -42,7 +42,7 @@
           }
      ?>
 
-     <div value="daysOfWeek" id="calendarStyle">
+     <div value="daysOfWeek" class="calendarStyle">
        <section class="dayLabel">Sunday</section>
        <section class="dayLabel">Monday</section>
        <section class="dayLabel">Tuesday</section>
@@ -51,7 +51,8 @@
        <section class="dayLabel">Friday</section>
        <section class="dayLabel">Saturday</section>
      </div>
-     <div id="calendarStyle" >
+     <div class="calendarStyle" id="calendar">
+       <!--
        <section value="0" class="dayBlock"></section>
        <section value="1" class="dayBlock"></section>
        <section value="2" class="dayBlock"></section>
@@ -59,6 +60,7 @@
        <section value="4" class="dayBlock"></section>
        <section value="5" class="dayBlock"></section>
        <section value="6" class="dayBlock"></section>
+     -->
      </div>
      <script src="scripts/calendar.js"></script>
     </body>

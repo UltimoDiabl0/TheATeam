@@ -24,9 +24,17 @@ form {
   width: 100%;
 }
 
-#calendarStyle {
+.timeBlockDummy{
+    /*Dummy class for making the js file easier to work with*/
+}
+
+.calendarStyle {
   display: flex;
   justify-content: center;
+}
+
+#calendar {
+  /*Dummy id for making the js file easier to work with*/
 }
 
 .dayBlock {
