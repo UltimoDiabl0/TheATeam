@@ -64,5 +64,10 @@
               die();
           }
      ?>
+
+      <div value="displayCurrGroups" class="groupListDisplay">
+
+     </div>
     </body>
+
 </html>
