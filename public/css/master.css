@@ -37,6 +37,10 @@ form {
   /*Dummy id for making the js file easier to work with*/
 }
 
+#week {
+    /*Dummy id for making the js file easier to work with*/
+}
+
 .dayBlock {
    width: 12.85%;
    height: 270px;
@@ -50,5 +54,11 @@ form {
 }
 
 .timeBlockDisplay {
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.tbDeleteButton {
 
 }

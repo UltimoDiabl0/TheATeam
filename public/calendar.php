@@ -29,7 +29,7 @@
 
                   echo "<p class='timeBlockDummy'>Timeblock ID: $row[0],  Start Time: $row[1], End Time: $row[2], Label: $row[3]</p>";
                   echo "<input type='hidden' value=$row[0] name='timeblockID'>";
-                  echo "<input type='submit' value='Delete'>";
+                  echo "<input class='tbDeleteButton' type='submit' value='Delete'>";
 
                 echo "</form>";
 
@@ -42,14 +42,14 @@
           }
      ?>
 
-     <div value="daysOfWeek" class="calendarStyle">
-       <section class="dayLabel">Sunday</section>
+     <div id="week" value="daysOfWeek" class="calendarStyle">
+       <!--<section class="dayLabel">Sunday</section>
        <section class="dayLabel">Monday</section>
        <section class="dayLabel">Tuesday</section>
        <section class="dayLabel">Wednesday</section>
        <section class="dayLabel">Thursday</section>
        <section class="dayLabel">Friday</section>
-       <section class="dayLabel">Saturday</section>
+       <section class="dayLabel">Saturday</section>-->
      </div>
      <div class="calendarStyle" id="calendar">
        <!--
