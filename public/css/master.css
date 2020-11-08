@@ -24,21 +24,9 @@ form {
   width: 100%;
 }
 
-.timeBlockDummy{
-    /*Dummy class for making the js file easier to work with*/
-}
-
 .calendarStyle {
   display: flex;
   justify-content: center;
-}
-
-#calendar {
-  /*Dummy id for making the js file easier to work with*/
-}
-
-#week {
-    /*Dummy id for making the js file easier to work with*/
 }
 
 .dayBlock {
@@ -60,7 +48,7 @@ form {
 }
 
 .tbDeleteButton {
-
+  /* We DO plan to use this to pretty up the button.*/
 }
 
 .groupListDisplay {
