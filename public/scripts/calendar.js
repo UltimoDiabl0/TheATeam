@@ -44,7 +44,8 @@ function buildCalendar() {
 
   //Now the juicy stuff, making the calendar appear!
   //The container to hold each day of the current week.
-  var dayContainer = document.querySelector('calendar');
+  var dayContainer = document.querySelector('#calendar');
+  var weekContainer = document.querySelector('#week');
 
   //TODO: Determine the current day's Day of week int
   //      loop through and find each day before and make sections for those
@@ -60,18 +61,68 @@ function buildCalendar() {
   for (let i=0; i<7; i++){
       //Again each day is worth 86400000ms
       var day = new Date(sunday.getTime()+(86400000*i));
+      //24 hours per day, 60 minutes per hour
+      //Think for now we'll just go for hourly blocks.
 
-      
+      //First, create the day.
+      document.open();
+      //.innerHTML
+      var dayBlock = document.createElement('section');
+      dayBlock.classList.add('dayLabel');
+      dayBlock.innerHTML = day.toDateString();
+      weekContainer.appendChild(dayBlock);
+
+      //Now get the timeblocks
+      var testTimeBlock = document.createElement('section');
+      //Now apply its class and add it as a child to the container.
+      testTimeBlock.classList.add('dayBlock');
+
+      insertTimeBlocks(testTimeBlock, timeBlockCopy, day);
+
+
+      dayContainer.appendChild(testTimeBlock);
+
+      document.close();
 
   }
 
   console.log(timeBlockCopy)
 
+}
+
+//Insert a time block into the day block specified.
+//This may occur twice if only start time or end time are used.
+//Takes in the newly created dayblock, as well as the list of timeblocks.
+function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
+
+  //Open the document and be ready to create the blocks necessary.
+  document.open();
+
+  console.log(curDay.toDateString());
+    timeBlocks.forEach(function(timeBlock){
+    //console.log(timeBlock.endTime.getTime() - timeBlock.startTime.getTime());
+
+      console.log(timeBlock.startTime.getTime() + ", " + timeBlock.endTime.getTime() + ", " + curDay.getTime());
+      if (timeBlock.startTime.getTime() <= curDay.getTime() && timeBlock.endTime.getTime() >= (curDay.getTime())){
+        //How will we space out the times?
+        //How do we determine the length of the blocks? Not logically but through syntax.
+        var testTimeBlock = document.createElement('section');
+        //Class=timeBlockDisplay
+        testTimeBlock.innerHTML = timeBlock.label + "\n" + timeBlock.startTime.toDateString() + " @ " + timeBlock.startTime.toTimeString() + "-" + timeBlock.endTime.toDateString() + " @ " + timeBlock.endTime.toTimeString() + "<input type='submit' value='Delete'>";
+        testTimeBlock.classList.add('timeBlockDisplay');
+        testTimeBlock.style.height = 100; //Todo: Dynamic height based off length of blocks
+        //testTimeBlock.appendChild(); //Append the php delete button
+        dayBlockElement.appendChild(testTimeBlock);
+      }
+
+    });
+
+    document.close();
 
 }
 
 //Create a time block object which converts the starttime and endtime into dates as well as maintaining the id and label
-function createTimeBlock(id, startTime, endTime, label){
+function createTimeBlock(id, startTime, endTime, label) {
   //This thing is an object, it has an id as a number (which should be parsed!)
   const obj = {};
   obj.id = id;
@@ -101,5 +152,7 @@ function pointToSunday(date){
   var dayOfWeek = date.getDay();
   var time = date.getTime();
   var newDate = new Date(time-(86400000*dayOfWeek));
-  return newDate;
+  console.log(newDate.getFullYear() + " " + (newDate.getMonth() + 1) + " " + newDate.getDate() + " ");
+  var newerDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), 0, 0, 0, 0);
+  return newerDate;
 }
