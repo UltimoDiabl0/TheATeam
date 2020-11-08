@@ -19,6 +19,11 @@
 
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           if (isset($_SESSION['username'])){
+
+            echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
+              echo "<input type='submit' value='Logout'>";
+            echo "</form>";
+
             echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
               echo "<input type='submit' value='Go Back'>";
             echo "</form>";
@@ -36,6 +41,15 @@
                   echo "<input type='hidden' value=$row[4] name='inviteID'>";
                   echo "<input type='submit' value='Deny'>";
 
+
+                echo "</form>";
+
+                echo "<form action='acceptInvite.php' method='post' class='timeblockDevDisplay' >";
+
+                  echo "<input type='hidden' value=$row[4] name='inviteID'>";
+                  echo "<input type='hidden' value=$row[2] name='groupID'>";
+                  echo "<input type='submit' value='Aceept'>";
+
                 echo "</form>";
 
             }
@@ -49,14 +63,20 @@
                   echo "<input type='hidden' value=$row[2] name='isHost'>";
                   echo "<input type='submit' value='Go To Group'>";
 
-                echo "</form>";
-                echo "<form action='leaveGroup.php' method='post' class='timeblockDevDisplay' >";
+                  echo "</form>";
+                  echo "<form action='leaveGroup.php' method='post' class='timeblockDevDisplay' >";
                   echo "<input type='hidden' value=$row[0] name='groupID'>";
+                  echo "<input type='hidden' value=$row[2] name='isHost'>";
                   echo "<input type='submit' value='Leave Group'>";
-                echo "</form>";
+                  echo "</form>";
+
 
             }
 
+          }
+
+          else{
+            header("Location: index.html");
           }
 
           } catch (PDOException $e) {
@@ -65,9 +85,7 @@
           }
      ?>
 
-      <div value="displayCurrGroups" class="groupListDisplay">
+       <div value="displayCurrGroups" class="groupListDisplay">
 
-     </div>
     </body>
-
 </html>

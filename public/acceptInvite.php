@@ -8,7 +8,9 @@ session_start();
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       if (isset($_SESSION['username'])){
 
-        $dbh->query("CALL deleteFromGroup('".$_POST['groupID']."','".$_SESSION['username']."','".$_POST['isHost']."')");
+        $dbh->query("CALL addToGroup('".$_POST['groupID']."','".$_SESSION['username']."')");
+
+        $dbh->query("CALL denyInvite('".$_POST['inviteID']."')");
         header("Location: groupList.php");
 
       }

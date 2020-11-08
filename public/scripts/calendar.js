@@ -103,7 +103,7 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
     //console.log(timeBlock.endTime.getTime() - timeBlock.startTime.getTime());
 
       console.log(timeBlock.startTime.getTime() + ", " + timeBlock.endTime.getTime() + ", " + curDay.getTime());
-      if (timeBlock.startTime.getTime() <= curDay.getTime() && timeBlock.endTime.getTime() >= (curDay.getTime())){
+      if (timeBlock.startTime.getDate() <= curDay.getDate() && timeBlock.endTime.getDate() >= (curDay.getDate())){
         //How will we space out the times?
         //How do we determine the length of the blocks? Not logically but through syntax.
         var testTimeBlock = document.createElement('section');
@@ -114,6 +114,8 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
         //testTimeBlock.appendChild(); //Append the php delete button
         dayBlockElement.appendChild(testTimeBlock);
       }
+
+
 
     });
 
@@ -155,4 +157,8 @@ function pointToSunday(date){
   console.log(newDate.getFullYear() + " " + (newDate.getMonth() + 1) + " " + newDate.getDate() + " ");
   var newerDate = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), 0, 0, 0, 0);
   return newerDate;
+}
+
+function withinTime(timeBlock, currentDay){
+    
 }
