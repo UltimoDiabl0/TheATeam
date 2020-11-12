@@ -31,7 +31,7 @@ form {
 
 .dayBlock {
    width: 12.85%;
-   height: 270px;
+   height: 480px;
    background: #FFFFFF;
    border: 1px solid black;
 }
@@ -47,8 +47,11 @@ form {
   border: 1px solid black;
 }
 
-.tbDeleteButton {
+.basicButton {
   /* We DO plan to use this to pretty up the button.*/
+  width: 20%;
+  height: 80%;
+  font-size: 10px;
 }
 
 .groupListDisplay {

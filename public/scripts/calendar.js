@@ -99,25 +99,67 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
   document.open();
 
   console.log(curDay.toDateString());
-    timeBlocks.forEach(function(timeBlock){
-    //console.log(timeBlock.endTime.getTime() - timeBlock.startTime.getTime());
-
-      console.log(timeBlock.startTime.getTime() + ", " + timeBlock.endTime.getTime() + ", " + curDay.getTime());
-      if (timeBlock.startTime.getDate() <= curDay.getDate() && timeBlock.endTime.getDate() >= (curDay.getDate())){
-        //How will we space out the times?
-        //How do we determine the length of the blocks? Not logically but through syntax.
-        var testTimeBlock = document.createElement('section');
-        //Class=timeBlockDisplay
-        testTimeBlock.innerHTML = timeBlock.label + "\n" + timeBlock.startTime.toDateString() + " @ " + timeBlock.startTime.toTimeString() + "-" + timeBlock.endTime.toDateString() + " @ " + timeBlock.endTime.toTimeString() + "<input type='submit' value='Delete'>";
-        testTimeBlock.classList.add('timeBlockDisplay');
-        testTimeBlock.style.height = 100; //Todo: Dynamic height based off length of blocks
-        //testTimeBlock.appendChild(); //Append the php delete button
-        dayBlockElement.appendChild(testTimeBlock);
-      }
+    for(let i = 0; i < 24; i++){
+      var testTimeBlock = document.createElement('section');
+      //testTimeBlock.style.height = '10px';
+      testTimeBlock.style.height = ((1/24)*100)+'%';
+      testTimeBlock.classList.add('timeBlockDisplay');
 
 
+      timeBlocks.forEach(function(timeBlock){
 
-    });
+        //console.log(timeBlock.endTime.getTime() - timeBlock.startTime.getTime());
+        var totalTime = timeBlock.endTime.getTime() - timeBlock.startTime.getTime(); //Total time in MS the timeblock is active for
+        //3600000
+        var totalHours = Math.ceil(totalTime / 3600000);
+        console.log(totalHours);
+
+        console.log(timeBlock.startTime.getTime() + ", " + timeBlock.endTime.getTime() + ", " + curDay.getTime());
+
+
+        console.log(dayCompare(timeBlock.startTime, curDay));
+        //Current solution: Listing them all by the hour.
+        if (timeBlock.startTime.getMonth() <= curDay.getMonth() && timeBlock.endTime.getMonth() >= curDay.getMonth()){
+
+          if (timeBlock.startTime.getDate() <= curDay.getDate() && timeBlock.endTime.getDate() >= curDay.getDate()) {
+
+              var curHour = curDay.getTime() + (i*3600000);
+              var curNextHour = curHour + 3600000;
+
+              console.log(curDay.getDate()+","+i+",")
+              console.log(timeBlock.startTime.getTime() >= curHour && timeBlock.startTime.getTime() < curNextHour);
+
+              //TODO: Make this not millitary time
+              if ((timeBlock.isPrinting == true) && (timeBlock.endTime.getTime() >= curHour && !(timeBlock.endTime.getTime() <= curNextHour))) {
+                //TODO: Add functionality to delete and edit buttons.
+                testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label  + " <input class='basicButton' type='submit' value='Edit'>" + "<input class='basicButton' type='submit' value='Delete'>";
+              }
+
+              if (timeBlock.startTime.getTime() >= curHour && timeBlock.startTime.getTime() < curNextHour) {
+                //Checks if the timeblock start time falls within the current hour and the next hour
+                testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label + " <input class='basicButton' type='submit' value='Edit'>" + "<input class='basicButton' type='submit' value='Delete'>";
+                timeBlock.isPrinting = true;
+              }
+
+          }
+          //testTimeBlock.appendChild(); //Append the php delete button
+        }
+      });
+
+      dayBlockElement.appendChild(testTimeBlock);
+
+      //Start and end on same day
+
+      //Start on this day, but end on another
+
+      //Did not start on this day, but started before, and does not end today
+
+      //Did not start on this day, but ends on this day.
+
+
+
+
+    }
 
     document.close();
 
@@ -133,6 +175,7 @@ function createTimeBlock(id, startTime, endTime, label) {
   obj.endTime = endTime;
   //And a label, it can be a string
   obj.label = label;
+  obj.isPrinting = false;
   return obj;
 }
 
@@ -159,6 +202,21 @@ function pointToSunday(date){
   return newerDate;
 }
 
-function withinTime(timeBlock, currentDay){
-    
+//Compares the two's dates by checking the actual date, the month and year
+//If all of these are equal for both days, returns true, else false.
+function dayCompare(day1, day2){
+
+  if (day1.getFullYear() != day2.getFullYear()) {
+    return false;
+  }
+
+  if (day1.getMonth() != day2.getMonth()) {
+    return false;
+  }
+
+  if (day1.getDate() != day2.getDate()){
+    return false;
+  }
+
+  return true;
 }
