@@ -132,7 +132,7 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
               //TODO: Make this not millitary time
               if ((timeBlock.isPrinting == true) && (timeBlock.endTime.getTime() >= curHour && !(timeBlock.endTime.getTime() <= curNextHour))) {
                 //TODO: Add functionality to delete and edit buttons.
-                testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label  + " <input class='basicButton' type='submit' value='Edit'>" + "<input class='basicButton' type='submit' value='Delete'>";
+                testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label;
               }
 
               if (timeBlock.startTime.getTime() >= curHour && timeBlock.startTime.getTime() < curNextHour) {
