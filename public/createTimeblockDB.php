@@ -10,12 +10,23 @@ try{
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   if (isset($_SESSION['username'])){
 
+    if ($_POST['startTime']<=$_POST['endTime']){
     // Preventing SQL Injection via prepare statement, and escaping variables to use as plain text and not code
-    $userHandler = $dbh->prepare("CALL createTimeblock( '".$_SESSION['username']."','".$_POST['startTime']."', '".$_POST['endTime']."', :label)");
-    $userHandler->bindParam(':label', $_POST['label']);
-    $userHandler->execute();
-    header("Location: calendar.php");
-
+      $userHandler = $dbh->prepare("CALL createTimeblock( '".$_SESSION['username']."',:startTime, :endTime, :label )");
+      $userHandler->bindParam(':startTime', $_POST['startTime']);
+      $userHandler->bindParam(':endTime', $_POST['endTime']);
+      $userHandler->bindParam(':label', $_POST['label']);
+      $userHandler->execute();
+      header("Location: calendar.php");
+    }
+    else {
+      $userHandler = $dbh->prepare("CALL createTimeblock( '".$_SESSION['username']."',:startTime, :endTime, :label )");
+      $userHandler->bindParam(':startTime', $_POST['endTime']);
+      $userHandler->bindParam(':endTime', $_POST['startTime']);
+      $userHandler->bindParam(':label', $_POST['label']);
+      $userHandler->execute();
+      header("Location: calendar.php");
+    }
   }
 
   } catch (PDOException $e) {
