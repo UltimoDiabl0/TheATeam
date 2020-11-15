@@ -9,6 +9,7 @@ try{
 
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   if (isset($_SESSION['username'])){
+
     if ($_POST['startTime']<=$_POST['endTime']){
     // Preventing SQL Injection via prepare statement, and escaping variables to use as plain text and not code
       $userHandler = $dbh->prepare("CALL createTimeblock( '".$_SESSION['username']."',:startTime, :endTime, :label )");
