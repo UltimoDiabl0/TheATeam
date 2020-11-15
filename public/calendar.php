@@ -9,7 +9,12 @@
     <link rel="stylesheet" href="./css/master.css">
   </head>
 
+
+
   <body>
+
+    <div class='navbar'>
+
     <?php
 
         try{
@@ -19,17 +24,24 @@
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           if (isset($_SESSION['username'])){
 
-            echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
+            echo "<form action='logout.php' method='post' class='navBarButton' >";
               echo "<input type='submit' value='Logout'>";
+            echo "</form>";
+
+            echo "<form>";
+              //Backenders: Will finding users be better through php or javascript?
+              //If the answer is former, we left you a present.
+              echo "<input type='text' placeholder='Search'>";
             echo "</form>";
 
             if(isset($_POST['username'])){
 
-              echo "<form action='groupView.php' method='post' class='timeblockDevDisplay' >";
+              echo "<form action='groupView.php' method='post' class='navBarButton' >";
                 echo "<input type='submit' value='Go Back'>";
               echo "</form>";
 
               echo "<form action='findTimeSingle.php' method='post'>";
+                echo "<input type='hidden' value=".$_POST['username']." name='username'>";
                 echo "<input type='submit' value='Find Time'>";
               echo "</form>";
 
@@ -56,7 +68,7 @@
 
                 echo "</form>";
 
-                echo "<form action='editTimeblock.php' method='post'>";
+                echo "<form action='editTimeblock.php' method='post' class='timeblockDevDisplay'>";
                   echo "<input type='hidden' value=$row[0] name='timeblockID'>";
                   echo "<input type='submit' value='Edit'>";
                 echo "</form>";
@@ -72,7 +84,13 @@
               die();
           }
      ?>
+    </div>
 
+          <!--
+            This is for frontenders to put in, do not fret my backend brothers.
+          -->
+          <button onclick="getWeek(false)">Last Week</button>
+          <button onclick="getWeek(true)">Next Week</button>
 
           <div id="week" value="daysOfWeek" class="calendarStyle">
             <!--<section class="dayLabel">Sunday</section>

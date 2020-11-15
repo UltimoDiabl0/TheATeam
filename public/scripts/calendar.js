@@ -15,6 +15,8 @@ function writeToDay(Date startTime, Date endTime){
 
 }**/
 
+var curTime = Date.now();
+
 buildCalendar();
 
 function buildCalendar() {
@@ -22,7 +24,7 @@ function buildCalendar() {
   console.log("BuildCalendar");
 
   //Get the current date and time to help build the calendar.
-  var curTime = Date.now();
+  //
 
   //Get all the elements holding the printed timeBlocks
   //Made a class called 'timeBlockDummy' which just is there to distinquish the time block paragraphs from the one before
@@ -79,12 +81,23 @@ function buildCalendar() {
 
       insertTimeBlocks(testTimeBlock, timeBlockCopy, day);
 
-
       dayContainer.appendChild(testTimeBlock);
 
       document.close();
 
   }
+
+  document.open();
+
+  var devDisplays = document.querySelectorAll("form.timeblockDevDisplay");
+
+  console.log(devDisplays);
+
+  devDisplays.forEach(function(devDisplay){
+    removeBlock(devDisplay);
+  });
+
+  document.close();
 
   console.log(timeBlockCopy)
 
@@ -137,7 +150,15 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
 
               if (timeBlock.startTime.getTime() >= curHour && timeBlock.startTime.getTime() < curNextHour) {
                 //Checks if the timeblock start time falls within the current hour and the next hour
-                testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label + " <input class='basicButton' type='submit' value='Edit'>" + "<input class='basicButton' type='submit' value='Delete'>";
+                testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label
+                + "<form action='editTimeblock.php' method='post'  class='basicButton'>"
+                    + "<input type='hidden' value="+timeBlock.id+" name='timeblockID'>"
+                    + " <input type='submit' value='Edit'>"
+                + "</form>"
+                + "<form action='deleteTimeblock.php' method='post'  class='basicButton' >"
+                    + "<input type='hidden' value="+timeBlock.id+" name='timeblockID'>"
+                    + "<input type='submit' value='Delete'>";
+                + "</form>"
                 timeBlock.isPrinting = true;
               }
 
@@ -219,4 +240,15 @@ function dayCompare(day1, day2){
   }
 
   return true;
+}
+
+//For some reason calling this function properly removed the element rather than just making the element call remove from the loop it's used in
+//So we gotta keep this.
+function removeBlock(elem) {
+  elem.remove();
+}
+
+
+function getNextWeek() {
+
 }
