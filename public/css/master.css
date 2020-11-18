@@ -13,7 +13,9 @@ form {
   display: inline-block;
   width: 235px;
 }
-
+/*
+* Used in calender.php
+*/
 .timeblockDevDisplay *{
   display: inline;
   margin: 0.5em;
@@ -27,11 +29,13 @@ form {
 .calendarStyle {
   display: flex;
   justify-content: center;
-}
 
+}
+/* Each section aka each column */
+/* May want to find a way to make only the left side and right side 1px thicker to make it look more full on the sides*/
 .dayBlock {
    width: 12.85%;
-   height: 580px;
+   height: 40em;
    background: #FFFFFF;
    border: 1px solid black;
 }
@@ -39,12 +43,14 @@ form {
 .dayLabel {
   width: 12.85%;
   text-align: center;
-}
 
+}
+/* Each time block rectangle */
 .timeBlockDisplay {
-  width: 100%;
   text-align: center;
   border: 1px solid black;
+  border-left-width: 0px;
+  border-right-width: 0px;
 }
 
 .basicButton {
@@ -53,7 +59,9 @@ form {
   height: 75%;
   font-size: 10px;
 }
-
+/*
+* Used in groupList.php
+*/
 .groupListDisplay {
   display: inline-flex;
   justify-content: flex-end;

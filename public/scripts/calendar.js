@@ -78,7 +78,6 @@ function buildCalendar() {
       var testTimeBlock = document.createElement('section');
       //Now apply its class and add it as a child to the container.
       testTimeBlock.classList.add('dayBlock');
-
       insertTimeBlocks(testTimeBlock, timeBlockCopy, day);
 
       dayContainer.appendChild(testTimeBlock);
@@ -115,7 +114,8 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
     for(let i = 0; i < 24; i++){
       var testTimeBlock = document.createElement('section');
       //testTimeBlock.style.height = '10px';
-      testTimeBlock.style.height = ((1/24)*100)+'%';
+      //The problem with the calendar looking weird is because of this style below
+      testTimeBlock.style.height = '3.854%';
       testTimeBlock.classList.add('timeBlockDisplay');
 
 
@@ -145,12 +145,15 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
               //TODO: Make this not millitary time
               if ((timeBlock.isPrinting == true) && (timeBlock.endTime.getTime() >= curHour && !(timeBlock.endTime.getTime() <= curNextHour))) {
                 //TODO: Add functionality to delete and edit buttons.
-                testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label;
+              testTimeBlock.innerHTML = militaryToStandard(curDay.getHours()+i) + " " + timeBlock.label;
+              console.log(militaryToStandard(curDay.getHours()+i));
+                //testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label;
               }
 
               if (timeBlock.startTime.getTime() >= curHour && timeBlock.startTime.getTime() < curNextHour) {
                 //Checks if the timeblock start time falls within the current hour and the next hour
-                testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label
+                testTimeBlock.innerHTML = militaryToStandard(curDay.getHours()+i) + " " + timeBlock.label
+              //  testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label
                 + "<form action='editTimeblock.php' method='post'  class='basicButton'>"
                     + "<input type='hidden' value="+timeBlock.id+" name='timeblockID'>"
                     + " <input type='submit' value='Edit'>"
@@ -251,4 +254,19 @@ function removeBlock(elem) {
 
 function getNextWeek() {
 
+}
+//Military is the same in standard up to 12, the only time it differs is 13 to 24, to get our desired number we can just subtract by 12 if the number is bigger than 12 to get the pm? I think
+function militaryToStandard(int){
+  if(int < 12 && int > 0){
+    return int+":00am";
+  }
+  else if(int > 12){
+    return int-12+":00pm";
+  }
+  else if(int == 0){
+    return "12:00am";
+  }
+  else if(int == 12){
+    return "12:00pm";
+  }
 }

@@ -9,3 +9,13 @@ Organized project file paths, attempted to get calendar page working. Created te
 + Added some functionality to findTimeGroup.php and findTimeSingle.php to allow for obtaining each user's time blocks.
 
 + Added findTime.js
+
+11/18/2020 - cjantcza-mtu
+
++ Changed around master.css and calender.js(line 118) code that styled the css for the certain calendar parts to make it look better
+
++ Added militaryToStandard function into calendar.js and applied it corrected
+
++ Attempted organization of master.css to help when we want to look back/ style some
+
+Side note, time blocks now with standard time and the edit and delete buttons are getting crowded, potential to change it to make it look more nice in the future
