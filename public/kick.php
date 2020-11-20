@@ -8,7 +8,7 @@ session_start();
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       if (isset($_SESSION['username'])){
 
-        $dbh->query("CALL deleteFromGroup('".$_SESSION['groupID']."','".$_POST['toBeKicked']."')");
+        $dbh->query("CALL deleteFromGroup('".$_SESSION['groupID']."','".$_POST['toBeKicked']."','".$_POST['isHost']."')");
         header("Location: groupView.php");
 
       }

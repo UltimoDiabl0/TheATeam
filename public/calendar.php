@@ -1,5 +1,8 @@
 <?php
   session_start();
+  if (!isset($_SESSION['username'])){
+    header("Location:index.html");
+  }
  ?>
 <!DOCTYPE html>
 <html>
@@ -30,7 +33,7 @@
               echo "</form>";
 
               echo "<form action='findTimeSingle.php' method='post'>";
-                echo"<input type='hidden' value=$_POST['username'] name='otherUser'>";
+                echo"<input type='hidden' value='".$_POST['username']."' name='otherUser'>";
                 echo "<input type='submit' value='Find Time'>";
               echo "</form>";
 
@@ -63,8 +66,6 @@
                 echo "</form>";
             }
           }
-        }else{
-          header("Location: index.html");
         }
 
 

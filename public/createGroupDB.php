@@ -8,7 +8,7 @@ try{
   $dbh = new PDO($config['dsn'], $config['username'],$config['password']);
 
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  if (isset($_SESSION['username'])){
+  if (isset($_POST['groupName']) && isset($_POST['groupType']) && isset($_POST['groupDesc'])){
 
     // Preventing SQL Injection via prepare statement, and escaping variables to use as plain text and not code
     $userHandler = $dbh->prepare("CALL createGroup( :groupName, :groupType, :groupDesc, '".$_SESSION['username']."')");
@@ -18,6 +18,8 @@ try{
     $userHandler->execute();
     header("Location: groupList.php");
 
+  }else{
+    header("Location: createGroup.php");
   }
 
   } catch (PDOException $e) {

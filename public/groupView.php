@@ -1,5 +1,8 @@
 <?php
   session_start();
+  if (!isset($_SESSION['username'])){
+    header("Location:index.html");
+  }
  ?>
 <!DOCTYPE html>
 <html>
@@ -52,6 +55,7 @@
                       echo "<form action='kick.php' method='post'>";
                         echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
                         echo "<input type='hidden' value=$row[0] name='toBeKicked'>";
+                        echo "<input type='hidden' value='0' name='toBeKicked'>";
                         echo "<input type='submit' value='Kick'>";
                       echo "</form>";
 
@@ -84,6 +88,6 @@
               die();
           }
      ?>
-     
+
     </body>
 </html>

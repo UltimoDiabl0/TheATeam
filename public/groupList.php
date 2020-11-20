@@ -1,5 +1,8 @@
 <?php
   session_start();
+  if (!isset($_SESSION['username'])){
+    header("Location:index.html");
+  }
  ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +51,7 @@
 
                   echo "<input type='hidden' value=$row[4] name='inviteID'>";
                   echo "<input type='hidden' value=$row[2] name='groupID'>";
-                  echo "<input type='submit' value='Aceept'>";
+                  echo "<input type='submit' value='Accept'>";
 
                 echo "</form>";
 
