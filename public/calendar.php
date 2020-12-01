@@ -1,7 +1,7 @@
 <?php
   session_start();
   if (!isset($_SESSION['username'])){
-    header("Location:index.html");
+    header("Location:index.php");
   }
  ?>
 <!DOCTYPE html>
@@ -40,13 +40,18 @@
               echo "<p>This is ".$_POST['username']."'s Timeblocks </p>";
               foreach ($dbh->query('CALL getTimeblocks("'.$_POST['username'].'")') as $row) {
                   echo "<form class='timeblockDevDisplay' >";
-
                     echo "<p>Timeblock ID: $row[0],  Start Time: $row[1], End Time: $row[2], Label: $row[3]</p>";
-
                   echo "</form>";
-            }
+                }
+
           }else{
             echo "<a href='groupList.php'>To Group Page</a>";
+            if($_SESSION['fail']){
+              echo "<div class='redtext'>";
+                echo "<p>Failed to edit Timeblock</p>";
+              echo "</div>";
+              $_SESSION['fail'] = false;
+            }
             echo "<p>This is ".$_SESSION['username']."'s Timeblocks </p>";
             echo "<form action='createTimeblock.php' method='post'>";
               echo "<input type='submit' value='Create New Timeblock'>";

@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <html>
 
 <head>
@@ -6,7 +11,8 @@
 </head>
 
 <body>
-  <form action=index.html method='post'>
+
+  <form action=index.php method='post'>
     <input type='submit' value='Go Back'>
   </form>
 
@@ -27,11 +33,19 @@
         <option value="WGT"> WGT </option>
       </select>
     </div>
+    <?php
+    if($_SESSION["fail"]){
+      echo "<div class='redtext'>";
+        echo "<p> Invalid Inputs! Username must be between 1 and 32 characters. Password must also be between 1 and 32 characters. </p>";
+      echo "</div>";
+      $_SESSION["fail"] = false;
+    }
 
+    ?>
     <div class="lsButtons">
       <input type="submit" name="signUp" value="Sign Up">
-      <a href="index.html">Log in</a>
     </div>
+
   </form>
 
 </body>

@@ -6,7 +6,15 @@ session_start();
       $dbh = new PDO($config['dsn'], $config['username'],$config['password']);
 
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      if (isset($_POST['username']) and isset($_POST['password']) and ($_POST['password'] == $_POST['passConfirm']) and ($_POST['username'] != "") and ($_POST['password'] != "") and ($_POST['passConfirm'] != "")){
+      if (isset($_POST['username'])
+      && isset($_POST['password'])
+       && (strcmp($_POST['password'], $_POST['passConfirm']) == 0)
+       && (strlen($_POST['username']) != 0)
+       && (strlen($_POST['password']) != 0)
+       && (strlen($_POST['passConfirm']) != 0)
+       && strlen($_POST['username']) <= 32
+       && strlen($_POST['password']) <= 32
+       && strlen($_POST['passConfirm']) <= 32){
 
         // Preventing SQL Injection via prepare statement, and escaping variables to use as plain text and not code
         $userHandler = $dbh->prepare('CALL createUser( :username, :password, :timezone)');
@@ -16,15 +24,18 @@ session_start();
 
         if($userHandler->execute()){
             //User created successful account
-            header("Location: index.html");
+            $_SESSION["success"] = true;
+            header("Location: index.php");
         } else {
             //User failed to create successful account
-            header("Location: signUp.html");
+            $_SESSION["fail"] = true;
+            header("Location: signUpView.php");
         }
 
       } else {
         //User failed to input correct information
-        header("Location: signUp.html");
+        $_SESSION["fail"] = true;
+        header("Location: signUpView.php");
       }
 
       } catch (PDOException $e) {

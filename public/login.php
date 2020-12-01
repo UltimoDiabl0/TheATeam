@@ -6,7 +6,7 @@ session_start();
       $dbh = new PDO($config['dsn'], $config['username'],$config['password']);
 
       $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      if (isset($_POST['username']) and isset($_POST['password']) ){
+      if (isset($_POST['username']) && isset($_POST['password']) && strlen($_POST['username']) != 0 && strlen($_POST['password']) != 0){
 
         // Preventing SQL Injection via prepare statement, and escaping variables to use as plain text and not code
         $userHandler = $dbh->prepare('SELECT loginUser( :username, :password)');
@@ -22,7 +22,11 @@ session_start();
               return;
             }
           }
-        header("Location: index.html");
+          $_SESSION["fail"] = true;
+          header("Location: index.php");
+      }else {
+        $_SESSION["fail"] = true;
+        header("Location: index.php");
       }
 
       } catch (PDOException $e) {
