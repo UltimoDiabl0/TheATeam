@@ -27,13 +27,13 @@
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           if (isset($_SESSION['username'])){
 
-            echo "<form action='logout.php' method='post' class='timeblockDevDisplay navBarButton' >";
+            echo "<form action='logout.php' method='post'  >";
               echo "<input type='submit' value='Logout'>";
             echo "</form>";
 
             if(isset($_POST['username'])){
 
-              echo "<form action='groupView.php' method='post' class='timeblockDevDisplay navBarButton' >";
+              echo "<form action='groupView.php' method='post'  >";
                 echo "<input type='submit' value='Go Back'>";
               echo "</form>";
 

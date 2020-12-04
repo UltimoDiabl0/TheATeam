@@ -53,30 +53,25 @@
                     echo "<input type='hidden' value=$row[0] name='username'>";
                     echo "<input type='submit' value='View Calendar'>";
                   echo "</form>";
-                  if($_SESSION['isHost'] == 1){
-                    if($_SESSION['username'] != $row[0]){
+                    if($_SESSION['isHost'] == 1){
+                      if($_SESSION['username'] != $row[0]){
 
-                      echo "<form action='kick.php' method='post'>";
-                        echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
-                        echo "<input type='hidden' value=$row[0] name='toBeKicked'>";
-                        echo "<input type='hidden' value='0' name='toBeKicked'>";
-                        echo "<input type='submit' value='Kick'>";
-                      echo "</form>";
+                        echo "<form action='kick.php' method='post'>";
+                          echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
+                          echo "<input type='hidden' value=$row[0] name='toBeKicked'>";
+                          echo "<input type='hidden' value='0' name='toBeKicked'>";
+                          echo "<input type='submit' value='Kick'>";
+                        echo "</form>";
 
-                      echo "<form action='promoteToHost.php' method='post'>";
-                        echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
-                        echo "<input type='hidden' value=$row[0] name='newHost'>";
-                        echo "<input type='submit' value='Make Host'>";
-                      echo "</form>";
+                        echo "<form action='promoteToHost.php' method='post'>";
+                          echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
+                          echo "<input type='hidden' value=$row[0] name='newHost'>";
+                          echo "<input type='submit' value='Make Host'>";
+                        echo "</form>";
 
+                      }
                     }
-                  }
-
-                    echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
-                      echo "<input type='hidden' value=$row[0] name='username'>";
-                      echo "<input type='submit' value='View Calendar'>";
-                    echo "</form>";
-              }
+                }
               }
 
 
