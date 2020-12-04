@@ -61,7 +61,7 @@
             foreach ($dbh->query('CALL getGroups("'.$_SESSION['username'].'")') as $row) {
                 echo "<form action='groupView.php' method='post' class='timeblockDevDisplay' >";
 
-                  echo "<p>GroupID: $row[0],  Current User: $row[1], isHost: $row[2], groupName: $row[3] groupType: $row[4] groupDesc: $row[5]</p>";
+                  echo "<p class='groupListDummy'>GroupID: $row[0],  Current User: $row[1], isHost: $row[2], groupName: $row[3], groupType: $row[4], groupDesc: $row[5]</p>";
                   echo "<input type='hidden' value=$row[0] name='groupID'>";
                   echo "<input type='hidden' value=$row[2] name='isHost'>";
                   echo "<input type='submit' value='Go To Group'>";
@@ -87,5 +87,16 @@
               die();
           }
      ?>
+
+       <div value="displayCurrInvites" class="groupListDisplay">
+
+       </div>
+
+       <div value="displayCurrGroups" class="groupListDisplay">
+
+       </div>
+
+         <script src="scripts/groupList.js"></script>
+
     </body>
 </html>

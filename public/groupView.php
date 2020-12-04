@@ -48,7 +48,11 @@
 
               foreach ($dbh->query('SELECT username FROM inGroup WHERE inGroup.groupID = "'.$_SESSION['groupID'].'"') as $row) {
                 if($_SESSION['username'] != $row[0]){
-                  echo "<p>This is $row[0]'s Timeblocks</p>";
+                  echo "<p>$row[0]:</p>";
+                  echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
+                    echo "<input type='hidden' value=$row[0] name='username'>";
+                    echo "<input type='submit' value='View Calendar'>";
+                  echo "</form>";
                   if($_SESSION['isHost'] == 1){
                     if($_SESSION['username'] != $row[0]){
 
