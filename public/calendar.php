@@ -25,6 +25,10 @@
           $dbh = new PDO($config['dsn'], $config['username'],$config['password']);
 
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+          $cache_session_username = (isset($_SESSION['username']))?$_SESSION['username']:'';
+          $cache_post_username = (isset($_POST['username']))?$_POST['username']:$_SESSION['username'];
+
           if (isset($_SESSION['username'])){
 
             echo "<form action='logout.php' method='post'  >";
@@ -89,8 +93,21 @@
           <!--
             This is for frontenders to put in, do not fret my backend brothers.
           -->
+
+          <!--
+            We actually need to perform a seperate script here due to the fact javascript
+            Normally cannot get php information on its own file,
+            so we need to obtain it from the php file.
+            Thankfully I have learned a better way than copying and pasting from the forms itself.
+         -->
+
+          <script type="text/javascript">
+            var sessionUser = "<?= $cache_session_username ?>";
+            var calenderUser = "<?= $cache_post_username ?>";
+          </script>
+
           <button onclick="getWeek(false)">Last Week</button>
-          <button onclick="getWeek(true)">Next Week</button>
+          <button onclick="rebuildCalendar()">Next Week</button>
 
           <div id="week" value="daysOfWeek" class="calendarStyle">
             <!--<section class="dayLabel">Sunday</section>

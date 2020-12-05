@@ -1,21 +1,12 @@
-
-//Given a date, we will take said day and get out a day of the week.
-/** dateToDay(Date _date){
-  //Get the day of the week in the form of an integer value, where sunday=0 and saturday=6
-  var dayOfWeek = _date.getDay();
-
-  return dayOfWeek;
-
-}
-
-//
-function writeToDay(Date startTime, Date endTime){
-
-
-
-}**/
-
 var curTime = Date.now();
+//This will be a table filled with timeblocks after build calendar is called.
+var timeBlocks = [];
+
+//var sessionUser = "<?php echo $cache_session_username); ?>";
+//var calenderUser = "<?php echo $cache_post_username; ?>";
+
+console.log(sessionUser);
+console.log(calenderUser);
 
 buildCalendar();
 
@@ -24,13 +15,11 @@ function buildCalendar() {
   console.log("BuildCalendar");
 
   //Get the current date and time to help build the calendar.
-  //
 
   //Get all the elements holding the printed timeBlocks
   //Made a class called 'timeBlockDummy' which just is there to distinquish the time block paragraphs from the one before
   //saying that this is the user's timeblocks.
   var timeBlockQuery = document.querySelectorAll("p.timeBlockDummy");
-  var timeBlocks = [];
 
   //Loop through each of the p blocks and get the time necessary for input into the timeBlocks.
   timeBlockQuery.forEach(function(time){
@@ -60,9 +49,9 @@ function buildCalendar() {
   var sunday = pointToSunday(new Date(curTime));
   var timeBlockCopy = [...timeBlocks];
 
-  for (let i=0; i<7; i++){
+  for (let day=0; day<7; day++){
       //Again each day is worth 86400000ms
-      var day = new Date(sunday.getTime()+(86400000*i));
+      var curDay = new Date(sunday.getTime()+(86400000*day));
       //24 hours per day, 60 minutes per hour
       //Think for now we'll just go for hourly blocks.
 
@@ -71,14 +60,14 @@ function buildCalendar() {
       //.innerHTML
       var dayBlock = document.createElement('section');
       dayBlock.classList.add('dayLabel');
-      dayBlock.innerHTML = day.toDateString();
+      dayBlock.innerHTML = curDay.toDateString();
       weekContainer.appendChild(dayBlock);
 
       //Now get the timeblocks
       var testTimeBlock = document.createElement('section');
       //Now apply its class and add it as a child to the container.
       testTimeBlock.classList.add('dayBlock');
-      insertTimeBlocks(testTimeBlock, timeBlockCopy, day);
+      insertTimeBlocks(testTimeBlock, timeBlockCopy, curDay);
 
       dayContainer.appendChild(testTimeBlock);
 
@@ -86,20 +75,53 @@ function buildCalendar() {
 
   }
 
+  //Open the document once again to make edits
   document.open();
 
   var devDisplays = document.querySelectorAll("form.timeblockDevDisplay");
 
   console.log(devDisplays);
 
+  //We now want to remove the dev displays from the page, this makes it so the timeblocks only appear on the calender.
   devDisplays.forEach(function(devDisplay){
     removeBlock(devDisplay);
   });
 
   document.close();
 
-  console.log(timeBlockCopy)
+  console.log(timeBlockCopy);
 
+}
+
+//This function will take the current calendar page, remove what's there currently and display the calendar for the week after or week before.
+//It follows a similar approach to build calendar, just it removes what's currently seen first.
+// Var: newStartDate: Represents the date of the sunday of the new week, at 0:00:00:000. In otherwords the exact start of the week.
+function rebuildCalendar(newStartDate){
+
+  //document.open();
+
+  //Starting off, we want to remove the timeblocks that are displayed.
+  //To do that we get every single timeblock, which is a section with the class "timeBlockDisplay"
+  //Get every-one of those, perform a for each to remove them.
+
+  var timeBlockDisplays = document.querySelectorAll(".timeBlockDisplay");
+  console.log(timeBlockDisplays);
+  timeBlockDisplays.forEach(function(timeBlock){
+    console.log(timeBlock);
+    timeBlock.remove();
+  });
+
+  //Same thing here, we just change the dates instead.
+  //That is, we simply remove these and replace them with the dates of the next week we transition to.
+  var dateDisplays = document.querySelectorAll(".dayLabel");
+  dateDisplays.forEach(function(dateBlock){
+    dateBlock.remove();
+  });
+
+
+  //Then we want to go through the same process as building the calender, since we stored timeblocks in a global array, we can skip finding those and removing dev text.
+
+  //document.close();
 }
 
 //Insert a time block into the day block specified.
@@ -111,7 +133,7 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
   document.open();
 
   console.log(curDay.toDateString());
-    for(let i = 0; i < 24; i++){
+    for(let hour = 0; hour < 24; hour++){
       var testTimeBlock = document.createElement('section');
       //testTimeBlock.style.height = '10px';
       //The problem with the calendar looking weird is because of this style below
@@ -136,32 +158,37 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
 
           if (timeBlock.startTime.getDate() <= curDay.getDate() && timeBlock.endTime.getDate() >= curDay.getDate()) {
 
-              var curHour = curDay.getTime() + (i*3600000);
+              var curHour = curDay.getTime() + (hour*3600000);
               var curNextHour = curHour + 3600000;
 
-              console.log(curDay.getDate()+","+i+",")
+              console.log(curDay.getDate()+","+hour+",")
               console.log(timeBlock.startTime.getTime() >= curHour && timeBlock.startTime.getTime() < curNextHour);
 
               //TODO: Make this not millitary time
               if ((timeBlock.isPrinting == true) && (timeBlock.endTime.getTime() >= curHour && !(timeBlock.endTime.getTime() <= curNextHour))) {
                 //TODO: Add functionality to delete and edit buttons.
-              testTimeBlock.innerHTML = militaryToStandard(curDay.getHours()+i) + " " + timeBlock.label;
-              console.log(militaryToStandard(curDay.getHours()+i));
+              testTimeBlock.innerHTML = militaryToStandard(curDay.getHours()+hour) + " " + timeBlock.label;
+              console.log(militaryToStandard(curDay.getHours()+hour));
                 //testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label;
               }
 
               if (timeBlock.startTime.getTime() >= curHour && timeBlock.startTime.getTime() < curNextHour) {
                 //Checks if the timeblock start time falls within the current hour and the next hour
-                testTimeBlock.innerHTML = militaryToStandard(curDay.getHours()+i) + " " + timeBlock.label
-              //  testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label
-                + "<form action='editTimeblock.php' method='post'  class='basicButton'>"
-                    + "<input type='hidden' value="+timeBlock.id+" name='timeblockID'>"
-                    + " <input type='submit' value='Edit'>"
-                + "</form>"
-                + "<form action='deleteTimeblock.php' method='post'  class='basicButton' >"
-                    + "<input type='hidden' value="+timeBlock.id+" name='timeblockID'>"
-                    + "<input type='submit' value='Delete'>";
-                + "</form>"
+                //We also need to see if the user in the session is the one who owns the page, if so, allow them to edit and delete timeblocks.
+                if (sessionUser.localeCompare(calenderUser) == 0){
+                  testTimeBlock.innerHTML = militaryToStandard(curDay.getHours()+hour) + " " + timeBlock.label
+                //  testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label
+                  + "<form action='editTimeblock.php' method='post'  class='basicButton'>"
+                      + "<input type='hidden' value="+timeBlock.id+" name='timeblockID'>"
+                      + " <input type='submit' value='Edit'>"
+                  + "</form>"
+                  + "<form action='deleteTimeblock.php' method='post'  class='basicButton' >"
+                      + "<input type='hidden' value="+timeBlock.id+" name='timeblockID'>"
+                      + "<input type='submit' value='Delete'>";
+                  + "</form>"
+                } else {
+                  testTimeBlock.innerHTML = militaryToStandard(curDay.getHours()+hour) + " " + timeBlock.label;
+                }
                 timeBlock.isPrinting = true;
               }
 
@@ -251,22 +278,26 @@ function removeBlock(elem) {
   elem.remove();
 }
 
-
 function getNextWeek() {
 
 }
+
+function getLastWeek() {
+
+}
+
 //Military is the same in standard up to 12, the only time it differs is 13 to 24, to get our desired number we can just subtract by 12 if the number is bigger than 12 to get the pm? I think
-function militaryToStandard(int){
-  if(int < 12 && int > 0){
-    return int+":00am";
+function militaryToStandard(hour){
+  if(hour < 12 && hour > 0){
+    return hour+":00am";
   }
-  else if(int > 12){
-    return int-12+":00pm";
+  else if(hour > 12){
+    return hour-12+":00pm";
   }
-  else if(int == 0){
+  else if(hour == 0){
     return "12:00am";
   }
-  else if(int == 12){
+  else if(hour == 12){
     return "12:00pm";
   }
 }
