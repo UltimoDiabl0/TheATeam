@@ -20,6 +20,7 @@
           $dbh = new PDO($config['dsn'], $config['username'],$config['password']);
 
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
           if (isset($_SESSION['username'])){
 
             echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
@@ -32,10 +33,14 @@
                 echo "<input type='submit' value='Go Back'>";
               echo "</form>";
 
-              echo "<form action='findTimeSingle.php' method='post'>";
+              echo "<form action='userTBCompareDB.php' method='post'>";
                 echo"<input type='hidden' value='".$_POST['username']."' name='otherUser'>";
                 echo "<input type='submit' value='Find Time'>";
               echo "</form>";
+
+              if (isset($_SESSION['startTime'])){
+                $_SESSION['startTime'] = null;
+              }
 
               echo "<p>This is ".$_POST['username']."'s Timeblocks </p>";
               foreach ($dbh->query('CALL getTimeblocks("'.$_POST['username'].'")') as $row) {
