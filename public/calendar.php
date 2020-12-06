@@ -15,8 +15,14 @@
 
 
   <body>
-
-    <div class='navbar'>
+    <div class="navBar">
+      <a href="groupList.php">My Groups</a>
+      <input type="text" placeholder="Search...">
+      <a href="logout.php" style="float: right;">Log Out</a>
+    </div>
+    <!--
+      Need to figure out how to change nav bar depending if it is your calendar or other user's calendar
+    -->
 
     <?php
 
@@ -88,7 +94,6 @@
               die();
           }
      ?>
-    </div>
 
           <!--
             This is for frontenders to put in, do not fret my backend brothers.

@@ -13,7 +13,12 @@
   </head>
 
   <body>
-
+    <div class="navBar">
+      <a href="calendar.php">My Calendar</a>
+      <a href="groupList.php">My Groups</a>
+      <input type="text" placeholder="Search...">
+      <a href="logout.php" style="float: right;">Log Out</a>
+    </div>
     <?php
         try{
             $config = parse_ini_file("db.ini");

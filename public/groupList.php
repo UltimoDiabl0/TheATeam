@@ -13,6 +13,11 @@
   </head>
 
   <body>
+    <div class="navBar">
+      <a href="calendar.php">My Calendar</a>
+      <input type="text" placeholder="Search...">
+      <a href="logout.php" style="float: right;">Log Out</a>
+    </div>
 
     <?php
 
