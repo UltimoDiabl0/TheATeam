@@ -15,7 +15,10 @@
   <body>
     <div class="navBar">
       <a href="calendar.php">My Calendar</a>
-      <input type="text" placeholder="Search...">
+      <form action = "searchUser.php">
+      <input type="text" placeholder="Search..." name="searchbarInput">
+      <button type="submit">Submit</button>
+      </form>
       <a href="logout.php" style="float: right;">Log Out</a>
     </div>
 
@@ -64,19 +67,29 @@
 
             echo "<p>This is ".$_SESSION['username']."'s Groups </p>";
             foreach ($dbh->query('CALL getGroups("'.$_SESSION['username'].'")') as $row) {
-                echo "<form action='groupView.php' method='post' class='timeblockDevDisplay' >";
+              ?>
+              <script>
+               var hopefullyRow = <?php echo json_encode($row); ?>;
+               console.log(hopefullyRow);
+               var individualGroup = document.createElement('group');
 
-                  echo "<p class='groupListDummy'>GroupID: $row[0],  Current User: $row[1], isHost: $row[2], groupName: $row[3], groupType: $row[4], groupDesc: $row[5]</p>";
-                  echo "<input type='hidden' value=$row[0] name='groupID'>";
-                  echo "<input type='hidden' value=$row[2] name='isHost'>";
-                  echo "<input type='submit' value='Go To Group'>";
+               individualGroup.style.width = '40%';
+               individualGroup.style.border = 'green';
+              </script>
 
-                  echo "</form>";
-                  echo "<form action='leaveGroup.php' method='post' class='timeblockDevDisplay' >";
-                  echo "<input type='hidden' value=$row[0] name='groupID'>";
-                  echo "<input type='hidden' value=$row[2] name='isHost'>";
-                  echo "<input type='submit' value='Leave Group'>";
-                  echo "</form>";
+              <?php
+                //  echo "<form action='groupView.php' method='post' class='timeblockDevDisplay' >";
+                //  echo "<p class='groupListDummy'>GroupID: $row[0],  Current User: $row[1], isHost: $row[2], groupName: $row[3], groupType: $row[4], groupDesc: $row[5]</p>";
+                //  echo "<input type='hidden' value=$row[0] name='groupID'>";
+                //  echo "<input type='hidden' value=$row[2] name='isHost'>";
+                //  echo "<input type='submit' value='Go To Group'>";
+
+                //  echo "</form>";
+                //  echo "<form action='leaveGroup.php' method='post' class='timeblockDevDisplay' >";
+                //  echo "<input type='hidden' value=$row[0] name='groupID'>";
+                //  echo "<input type='hidden' value=$row[2] name='isHost'>";
+                //  echo "<input type='submit' value='Leave Group'>";
+                //  echo "</form>";
 
 
             }
