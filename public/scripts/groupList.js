@@ -1,5 +1,7 @@
 
 pushThrough();
+//userInterface();
+//testLength();
 
 function pushThrough(){
   //for loop defining how many times to do This
@@ -53,3 +55,15 @@ function parseGroup(id, isHost, name, type, desc) {
 
   return obj;
 }
+/*
+function userInterface(){
+var groupQuery = document.querySelectorAll("p.groupListDummy");
+groupQuery.forEach(function(groupTag){
+  console.log("Hello world!1");
+})
+}
+
+function testLength(){
+console.log(hopefullyRow);
+}
+*/

@@ -71,6 +71,8 @@ form {
 .groupListDisplay {
   display: inline-flex;
   justify-content: flex-end;
+  height: 40%;
+  overflow-y: auto;
 }
 .groupListGroups {
   width: 25%;
