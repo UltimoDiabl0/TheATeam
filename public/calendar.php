@@ -34,18 +34,38 @@
 
           $cache_session_username = (isset($_SESSION['username']))?$_SESSION['username']:'';
           $cache_post_username = (isset($_POST['username']))?$_POST['username']:$_SESSION['username'];
+          $cache_session_usernameSearched = (isset($_SESSION['usernameSearched']))?$_SESSION['usernameSearched']:$_SESSION['username'];
 
           if (isset($_SESSION['username'])){
 
             echo "<form action='logout.php' method='post'  >";
               echo "<input type='submit' value='Logout'>";
             echo "</form>";
+            echo "".$_POST['username']."";
+            if(isset($_POST['username']) || isset($_SESSION['usernameSearched'])){
 
-            if(isset($_POST['username'])){
+              if(isset($_SESSION['usernameSearched'])){
+                echo "<form action='calendar.php'>";
+                  echo "<input type='submit' value='Go Back'>";
+                echo "</form>";
 
-              echo "<form action='groupView.php' method='post'  >";
-                echo "<input type='submit' value='Go Back'>";
-              echo "</form>";
+                echo "<form action='findTimeSingle.php' method='post'>";
+                  echo "<input type='hidden' value=".$_SESSION['usernameSearched']." name='username'>";
+                  echo "<input type='submit' value='Find Time'>";
+                echo "</form>";
+
+                echo "<p>This is ".$_SESSION['usernameSearched']."'s Timeblocks </p>";
+                foreach ($dbh->query('CALL getTimeblocks("'.$_SESSION['usernameSearched'].'")') as $row) {
+                    echo "<form class='timeblockDevDisplay' >";
+                      echo "<p class='timeBlockDummy'>Timeblock ID: $row[0],  Start Time: $row[1], End Time: $row[2], Label: $row[3]</p>";
+                    echo "</form>";
+                  }
+                  $_SESSION['usernameSearched'] = $_SESSION['username'];
+              }else{
+
+                echo "<form action='groupView.php' method='post'  >";
+                  echo "<input type='submit' value='Go Back'>";
+                echo "</form>";
 
               echo "<form action='findTimeSingle.php' method='post'>";
                 echo "<input type='hidden' value=".$_POST['username']." name='username'>";
@@ -58,7 +78,7 @@
                     echo "<p class='timeBlockDummy'>Timeblock ID: $row[0],  Start Time: $row[1], End Time: $row[2], Label: $row[3]</p>";
                   echo "</form>";
                 }
-
+              }
           }else{
             echo "<a href='groupList.php'>To Group Page</a>";
             if($_SESSION['fail']){
@@ -109,10 +129,11 @@
           <script type="text/javascript">
             var sessionUser = "<?= $cache_session_username ?>";
             var calenderUser = "<?= $cache_post_username ?>";
+            var secretSessionUser = "<?= $cache_session_usernameSearched ?>";
           </script>
 
-          <button onclick="getWeek(false)">Last Week</button>
-          <button onclick="rebuildCalendar()">Next Week</button>
+          <button onclick="getLastWeek()">Last Week</button>
+          <button onclick="getNextWeek()">Next Week</button>
 
           <div id="week" value="daysOfWeek" class="calendarStyle">
             <!--<section class="dayLabel">Sunday</section>
