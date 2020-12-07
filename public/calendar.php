@@ -16,13 +16,13 @@
 
   <body>
     <div class="navBar">
+      <a href="calendar.php">My Calendar</a>
       <a href="groupList.php">My Groups</a>
-      <input type="text" placeholder="Search...">
+      <form action="searchUser.php" method='post'>
+        <input type="text" placeholder="Search..." name="searchbarInput">
+      </form>
       <a href="logout.php" style="float: right;">Log Out</a>
     </div>
-    <!--
-      Need to figure out how to change nav bar depending if it is your calendar or other user's calendar
-    -->
 
     <?php
 
@@ -38,9 +38,9 @@
 
           if (isset($_SESSION['username'])){
 
-            echo "<form action='logout.php' method='post'  >";
-              echo "<input type='submit' value='Logout'>";
-            echo "</form>";
+          //  echo "<form action='logout.php' method='post'  >";
+          //    echo "<input type='submit' value='Logout'>";
+        //    echo "</form>";
             echo "".$_POST['username']."";
             if(isset($_POST['username']) || isset($_SESSION['usernameSearched'])){
 
@@ -80,7 +80,7 @@
                 }
               }
           }else{
-            echo "<a href='groupList.php'>To Group Page</a>";
+            //echo "<a href='groupList.php'>To Group Page</a>";
             if($_SESSION['fail']){
               echo "<div class='redtext'>";
                 echo "<p>Failed to edit Timeblock</p>";

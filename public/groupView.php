@@ -16,7 +16,9 @@
     <div class="navBar">
       <a href="calendar.php">My Calendar</a>
       <a href="groupList.php">My Groups</a>
-      <input type="text" placeholder="Search...">
+      <form action="searchUser.php" method='post'>
+        <input type="text" placeholder="Search..." name="searchbarInput">
+      </form>
       <a href="logout.php" style="float: right;">Log Out</a>
     </div>
     <?php
