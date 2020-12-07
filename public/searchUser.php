@@ -14,14 +14,16 @@ try{
   if (isset($_SESSION['username'])){
 
     // Preventing SQL Injection via prepare statement, and escaping variables to use as plain text and not code
-    $userHandler = $dbh->prepare('CALL getUser(:username)');
+    $userHandler = $dbh->prepare('SELECT getUser(:username)');
     $userHandler->bindParam(':username', $_POST['searchbarInput']);
     $userHandler->execute();
     foreach ($userHandler->fetch(PDO::FETCH_ASSOC) as $row) {
         if (!is_null($row[0])) {
-          $_POST['username'] = $row;
+          $_SESSION['usernameSearched'] = $row;
           header("Location: calendar.php");
           return;
+        }else{
+          header("Location: calendar.php");
         }
       }
   }

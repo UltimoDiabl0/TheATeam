@@ -15,9 +15,9 @@
   <body>
     <div class="navBar">
       <a href="calendar.php">My Calendar</a>
-      <form action = "searchUser.php">
-      <input type="text" placeholder="Search..." name="searchbarInput">
-      <button type="submit">Submit</button>
+      <form action="searchUser.php" method='post'>
+        <input type="text" placeholder="Search..." name="searchbarInput">
+        <button type="submit">Submit</button>
       </form>
       <a href="logout.php" style="float: right;">Log Out</a>
     </div>

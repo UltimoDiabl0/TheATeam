@@ -175,7 +175,7 @@ function insertTimeBlocks(dayBlockElement, timeBlocks, curDay) {
               if (timeBlock.startTime.getTime() >= curHour && timeBlock.startTime.getTime() < curNextHour) {
                 //Checks if the timeblock start time falls within the current hour and the next hour
                 //We also need to see if the user in the session is the one who owns the page, if so, allow them to edit and delete timeblocks.
-                if (sessionUser.localeCompare(calenderUser) == 0){
+                if (sessionUser.localeCompare(calenderUser) == 0 && sessionUser.localeCompare(secretSessionUser) == 0){
                   testTimeBlock.innerHTML = militaryToStandard(curDay.getHours()+hour) + " " + timeBlock.label
                 //  testTimeBlock.innerHTML = (curDay.getHours() + i) + ":00 " + timeBlock.label
                   + "<form action='editTimeblock.php' method='post'  class='basicButton'>"
