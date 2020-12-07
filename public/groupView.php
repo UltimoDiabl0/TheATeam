@@ -34,7 +34,7 @@
                 echo "<input type='submit' value='Go Back'>";
               echo "</form>";
 
-              echo "<form action='findTimeGroup.php' method='post'>";
+              echo "<form action='groupTBCompare.php' method='post'>";
                 echo "<input type='submit' value='Find Time'>";
               echo "</form>";
 
