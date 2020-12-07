@@ -46,7 +46,7 @@ try{
       foreach ($dbh->query("SELECT compareTimeblocks('$targetStart[$targetSlider]','$userStart[$userSlider]')")as $row){
         $temp2 = $row;
       }
-      foreach ($dbh->query("SELECT compareTimeblocks('$userEnd[$userSlider]','$targetEnd[$targetSlider]')")as $row){
+      foreach ($dbh->query("SELECT compareTimeblocks('$targetStart[$targetSlider]','$userEnd[$userSlider]')")as $row){
         $temp3 = $row;
       }
       foreach ($dbh->query("SELECT compareTimeblocks('$userEnd[$userSlider]','$targetEnd[$targetSlider]')")as $row){
@@ -100,7 +100,7 @@ try{
 
       echo "<form action='calendar.php' method='post'>";
         echo"<input type='hidden' value='".$_POST['otherUser']."' name='username'>";
-        
+
         echo "<input type='submit' value='Go Back'>";
       echo "</form>";
       //header("Location:calendar.php");
