@@ -132,8 +132,8 @@
             var secretSessionUser = "<?= $cache_session_usernameSearched ?>";
           </script>
 
-          <button onclick="getWeek(false)">Last Week</button>
-          <button onclick="rebuildCalendar()">Next Week</button>
+          <button onclick="getLastWeek()">Last Week</button>
+          <button onclick="getNextWeek()">Next Week</button>
 
           <div id="week" value="daysOfWeek" class="calendarStyle">
             <!--<section class="dayLabel">Sunday</section>
