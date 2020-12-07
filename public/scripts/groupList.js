@@ -23,11 +23,11 @@ function pushThrough(){
     var gName = innerTxt[3].split(': ')[1];
     var gType = innerTxt[4].split(': ')[1];
     var gDesc = innerTxt[5].split(': ')[1];
-    console.log();
+    //console.log();
     groups.push(parseGroup(parseInt(id), parseInt(isHost), gName, gType, gDesc))
   })
 
-  console.log(groups);
+//  console.log(groups);
 
   //document.getElementById("groupListGroups").innerHTML = 1 + 1;
 }
