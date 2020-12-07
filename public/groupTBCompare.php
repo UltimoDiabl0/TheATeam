@@ -29,10 +29,7 @@ try{
         $targetSlider = 0;//used to iterate through both target arrays at once
 
         while($notFound){
-    //check if the start of a the current user's timeblock falls in the middle of the target's current timeblock
-
-
-          $temp = array();
+            $temp = array();
           foreach ($dbh->query("SELECT compareTimeblocks('$userStart[$userSlider]','$targetStart[$targetSlider]')")as $row){
             $temp = $row;
           }
@@ -49,8 +46,9 @@ try{
             $temp4 = $row;
           }
 
-
+          //does the current user's start time fall within the group's timeblocks?
           if ($temp[0] >= 0 && $temp1[0] < 0){
+            //if so, whose time ends first?
             if ($temp4[0]<1){
               array_push($holdStart,$userStart[$userSlider]);
               array_push($holdEnd,$userEnd[$userSlider]);
@@ -60,7 +58,6 @@ try{
               array_push($holdEnd,$targetEnd[$targetSlider]);
             }
           }
-    //check if the start of a the current target's timeblock falls in the middle of the user's current timeblock
           elseif($temp2[0]>=0 && $temp3[0]<0){
             if ($temp4[0]<1){
               array_push($holdStart,$targetStart[$targetSlider]);
@@ -90,12 +87,6 @@ try{
               }
             }
           }
-
-
-
-
-
-
         $targetStart = $holdStart;
         $targetEnd = $holdEnd;
       }
@@ -109,11 +100,11 @@ try{
     }
 
 
-    if (count($targetStart)>0){
+    if (count($targetStart) > 0){
       echo"<p>Time to start your event: ".$targetStart[0]."</p>";
     }
     else{
-      echo"<p>No common time</p>";
+      echo"<p>The group has no common time</p>";
     }
     echo "<form action='groupView.php' method='post'>";
       echo "<input type='submit' value='Go Back'>";
