@@ -34,6 +34,7 @@
 
           $cache_session_username = (isset($_SESSION['username']))?$_SESSION['username']:'';
           $cache_post_username = (isset($_POST['username']))?$_POST['username']:$_SESSION['username'];
+          $cache_session_usernameSearched = (isset($_SESSION['usernameSearched']))?$_SESSION['usernameSearched']:$_SESSION['username'];
 
           if (isset($_SESSION['username'])){
 
@@ -59,7 +60,7 @@
                       echo "<p class='timeBlockDummy'>Timeblock ID: $row[0],  Start Time: $row[1], End Time: $row[2], Label: $row[3]</p>";
                     echo "</form>";
                   }
-                  unset($_SESSION['usernameSearched']);
+                  $_SESSION['usernameSearched'] = $_SESSION['username'];
               }else{
 
                 echo "<form action='groupView.php' method='post'  >";
