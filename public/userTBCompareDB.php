@@ -83,10 +83,6 @@ try{
             break;
           }
         }
-
-        if(!$notFound){
-        //  header("Location:calendar.php");
-        }
       }
 
 
