@@ -51,8 +51,8 @@
                   echo "<input type='submit' value='Go Back'>";
                 echo "</form>";
 
-                echo "<form action='findTimeSingle.php' method='post'>";
-                  echo "<input type='hidden' value=".$_SESSION['usernameSearched']." name='username'>";
+                echo "<form action='userTBCompareDB.php' method='post'>";
+                  echo "<input type='hidden' value=".$_SESSION['usernameSearched']." name='otherUser'>";
                   echo "<input type='submit' value='Find Time'>";
                 echo "</form>";
 
