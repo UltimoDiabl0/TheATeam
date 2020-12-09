@@ -13,7 +13,9 @@ form {
   display: inline-block;
   width: 235px;
 }
-
+/*
+* Used in calender.php
+*/
 .timeblockDevDisplay *{
   display: inline;
   margin: 0.5em;
@@ -27,6 +29,98 @@ form {
 .redtext {
   color: #FF0000;
 }
+
 .bluetext {
   color: #0000FF;
+}
+
+.calendarStyle {
+  display: flex;
+  justify-content: center;
+}
+/* Each section aka each column */
+/* May want to find a way to make only the left side and right side 1px thicker to make it look more full on the sides*/
+.dayBlock {
+   width: 12.85%;
+   height: 40em;
+   background: #FFFFFF;
+   border: 1px solid black;
+}
+
+.dayLabel {
+  width: 12.85%;
+  text-align: center;
+}
+/* Each time block rectangle */
+.timeBlockDisplay {
+  text-align: center;
+  border: 1px solid black;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+
+.basicButton {
+  /* We DO plan to use this to pretty up the button.*/
+  width: 20%;
+  height: 75%;
+  font-size: 10px;
+}
+/*
+* Used in groupList.php
+*/
+.groupListDisplay {
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  justify-content: flex-start;
+  overflow: auto;
+}
+.groupListGroups {
+  width: 25%;
+  height: 6.1225%;
+}
+
+.navBarButton {
+  /*TODO: Make neat*/
+}
+/*
+* Navbar stuff
+*/
+.navBar {
+  background-color: #080808;
+  overflow: hidden;
+
+}
+.navBar a {
+  justify-content: flex-start;
+  display: inline-flex;
+  color: white;
+  text-align: center;
+  float: left;
+  padding: 15px;
+  text-decoration: none;
+  margin: 1px;
+}
+.navBar a logOut {
+  float: right;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+
+  display: block;
+  color: white;
+  text-align: center;
+  margin: 1px;
+  text-decoration: none;
+}
+.navBar input[type=text] {
+  margin-left:250%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.navBar a:hover {
+  background-color:#a9a9a9;
+  color: white;
 }

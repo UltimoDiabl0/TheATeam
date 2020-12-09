@@ -13,7 +13,14 @@
   </head>
 
   <body>
-
+    <div class="navBar">
+      <a href="calendar.php">My Calendar</a>
+      <a href="groupList.php">My Groups</a>
+      <form action="searchUser.php" method='post'>
+        <input type="text" placeholder="Search..." name="searchbarInput">
+      </form>
+      <a href="logout.php" style="float: right;">Log Out</a>
+    </div>
     <?php
         try{
             $config = parse_ini_file("db.ini");
@@ -48,31 +55,30 @@
 
               foreach ($dbh->query('SELECT username FROM inGroup WHERE inGroup.groupID = "'.$_SESSION['groupID'].'"') as $row) {
                 if($_SESSION['username'] != $row[0]){
-                  echo "<p>This is $row[0]'s Timeblocks</p>";
-                  if($_SESSION['isHost'] == 1){
-                    if($_SESSION['username'] != $row[0]){
+                  echo "<p>$row[0]:</p>";
+                  echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
+                    echo "<input type='hidden' value=$row[0] name='username'>";
+                    echo "<input type='submit' value='View Calendar'>";
+                  echo "</form>";
+                    if($_SESSION['isHost'] == 1){
+                      if($_SESSION['username'] != $row[0]){
 
-                      echo "<form action='kick.php' method='post'>";
-                        echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
-                        echo "<input type='hidden' value=$row[0] name='toBeKicked'>";
-                        echo "<input type='hidden' value='0' name='toBeKicked'>";
-                        echo "<input type='submit' value='Kick'>";
-                      echo "</form>";
+                        echo "<form action='kick.php' method='post'>";
+                          echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
+                          echo "<input type='hidden' value=$row[0] name='toBeKicked'>";
+                          echo "<input type='hidden' value='0' name='toBeKicked'>";
+                          echo "<input type='submit' value='Kick'>";
+                        echo "</form>";
 
-                      echo "<form action='promoteToHost.php' method='post'>";
-                        echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
-                        echo "<input type='hidden' value=$row[0] name='newHost'>";
-                        echo "<input type='submit' value='Make Host'>";
-                      echo "</form>";
+                        echo "<form action='promoteToHost.php' method='post'>";
+                          echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
+                          echo "<input type='hidden' value=$row[0] name='newHost'>";
+                          echo "<input type='submit' value='Make Host'>";
+                        echo "</form>";
 
+                      }
                     }
-                  }
-
-                    echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
-                      echo "<input type='hidden' value=$row[0] name='username'>";
-                      echo "<input type='submit' value='View Calendar'>";
-                    echo "</form>";
-              }
+                }
               }
 
 

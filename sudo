@@ -1,0 +1,38 @@
+
+###Printing to HTML!
+
+  var testTimeBlock = document.createElement('section');
+  console.log(dayContainer);
+  testTimeBlock.classList.add('dayBlock');
+  dayContainer.appendChild(testTimeBlock);
+
+###
+
+
+sunday = pointToSunday(curTime);
+timeBlockCopy = timeBlocks;
+
+for i=0 to 6 do {
+
+  day = new Date(sunday.getTime()+(86400000*i));
+
+  square = doc.addnode("section");
+
+
+
+  printsquare (however we do it);
+
+  timeBlockCopy.forEach(function(timeBlock){
+    if timeBlock.startTime != NaN && (timeBlock.startTime.getDate() == day.getDate())
+    {
+      printstarttime;
+      timeBlock.startTime = NaN;
+    }
+    if timeBlock.endTime != NaN && (timeBlock.endTime.getDate() == day.getDate())
+    {
+      printendtime;
+      timeBlock.endTime = NaN;
+    }
+  });
+
+}
