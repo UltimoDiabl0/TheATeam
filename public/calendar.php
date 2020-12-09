@@ -32,9 +32,11 @@
 
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+
           $cache_session_username = (isset($_SESSION['username']))?$_SESSION['username']:'';
           $cache_post_username = (isset($_POST['username']))?$_POST['username']:$_SESSION['username'];
           $cache_session_usernameSearched = (isset($_SESSION['usernameSearched']))?$_SESSION['usernameSearched']:$_SESSION['username'];
+
 
           if (isset($_SESSION['username'])){
 
@@ -49,8 +51,8 @@
                   echo "<input type='submit' value='Go Back'>";
                 echo "</form>";
 
-                echo "<form action='findTimeSingle.php' method='post'>";
-                  echo "<input type='hidden' value=".$_SESSION['usernameSearched']." name='username'>";
+                echo "<form action='userTBCompareDB.php' method='post'>";
+                  echo "<input type='hidden' value=".$_SESSION['usernameSearched']." name='otherUser'>";
                   echo "<input type='submit' value='Find Time'>";
                 echo "</form>";
 
@@ -67,10 +69,15 @@
                   echo "<input type='submit' value='Go Back'>";
                 echo "</form>";
 
-              echo "<form action='findTimeSingle.php' method='post'>";
-                echo "<input type='hidden' value=".$_POST['username']." name='username'>";
+              echo "<form action='userTBCompareDB.php' method='post'>";
+                echo"<input type='hidden' value='".$_POST['username']."' name='otherUser'>";
+
                 echo "<input type='submit' value='Find Time'>";
               echo "</form>";
+
+              if (isset($_SESSION['startTime'])){
+                $_SESSION['startTime'] = null;
+              }
 
               echo "<p>This is ".$_POST['username']."'s Timeblocks </p>";
               foreach ($dbh->query('CALL getTimeblocks("'.$_POST['username'].'")') as $row) {
