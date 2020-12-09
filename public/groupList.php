@@ -72,7 +72,6 @@
               // tempGroupArray[0] = GroupID; tempGroupArray[1] = Current User; tempGroupArray[2] = isHost;
               // tempGroupArray[3] = groupName; tempGroupArray[4] = groupType; tempGroupArray[5] = groupDesc;
                var tempGroupArray = <?php echo json_encode($row); ?>;
-               console.log(tempGroupArray);
                var individualGroup = document.createElement('group');
                individualGroup.style.width = "20%";
                individualGroup.style.height = "150px";

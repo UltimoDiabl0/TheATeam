@@ -2,6 +2,13 @@
   background-color: #A9A9A9;
 }
 
+.inlineButtons{
+    display: inline;
+}
+
+.groupViewButton{
+  display:  inline-flex;
+}
 
 .lsButtons {
   display: flex;
