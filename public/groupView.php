@@ -21,6 +21,7 @@
       </form>
       <a href="logout.php" style="float: right;">Log Out</a>
     </div>
+
     <?php
         try{
             $config = parse_ini_file("db.ini");
@@ -33,13 +34,13 @@
                   $_SESSION['isHost'] = $_POST['isHost'];
               }
 
-              echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
-                echo "<input type='submit' value='Logout'>";
-              echo "</form>";
+              //echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
+              //  echo "<input type='submit' value='Logout'>";
+              //echo "</form>";
 
-              echo "<form action='groupList.php' method='post'>";
-                echo "<input type='submit' value='Go Back'>";
-              echo "</form>";
+              //echo "<form action='groupList.php' method='post'>";
+              //  echo "<input type='submit' value='Go Back'>";
+              //echo "</form>";
 
               echo "<form action='findTimeGroup.php' method='post'>";
                 echo "<input type='submit' value='Find Time'>";
@@ -55,14 +56,64 @@
 
               foreach ($dbh->query('SELECT username FROM inGroup WHERE inGroup.groupID = "'.$_SESSION['groupID'].'"') as $row) {
                 if($_SESSION['username'] != $row[0]){
-                  echo "<p>$row[0]:</p>";
-                  echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
-                    echo "<input type='hidden' value=$row[0] name='username'>";
-                    echo "<input type='submit' value='View Calendar'>";
-                  echo "</form>";
+
+                  ?>
+                  <div id="displayGroupUsers" class="groupListDisplay">
+                  </div>
+                  <script>
+                  document.open();
+
+                  var groupUsername = <?php echo json_encode($row); ?>;
+                  var individualUser = document.createElement('user');
+                  individualUser.style.width = "20%";
+                  individualUser.style.height = "100px";
+                  individualUser.style.background = "white";
+                  individualUser.style.color = "black";
+                  individualUser.style.borderStyle = "solid";
+                  individualUser.style.textAlign = "center";
+                  individualUser.style.fontSize = "200%";
+                  individualUser.style.marginRight = "1em";
+                //  individualUser.style.borderRadius = "20px";
+                  individualUser.innerHTML =  groupUsername[0] + "<br/><form action='calendar.php' method='post'> <input type='hidden' value=" + groupUsername[0] + " name='username'> <input type='submit' value='View Calendar'> </form>";
+
+
+                   document.getElementById("displayGroupUsers").appendChild(individualUser);
+                  document.close();
+                  </script>
+                  <?php
+
+              //    echo "<p>$row[0]:</p>";
+            //      echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
+            //        echo "<input type='hidden' value=$row[0] name='username'>";
+            //        echo "<input type='submit' value='View Calendar'>";
+            //      echo "</form>";
                     if($_SESSION['isHost'] == 1){
                       if($_SESSION['username'] != $row[0]){
+                        ?>
+                        <script>
+                        document.open();
 
+                        var groupUsername = <?php echo json_encode($row); ?>;
+                        var individualUser = document.getElementById('user');
+                        /*
+                        individualUser.style.width = "20%";
+                        individualUser.style.height = "100px";
+                        individualUser.style.background = "white";
+                        individualUser.style.color = "black";
+                        individualUser.style.borderStyle = "solid";
+                        individualUser.style.textAlign = "center";
+                        individualUser.style.fontSize = "200%";
+                      //  individualUser.style.borderRadius = "20px";*/
+                        individualUser.innerHTML =  groupUsername[0] + "<br/><form action='calendar.php' method='post'> <input type='hidden' value=" + groupUsername[0] + " name='username'> <input type='submit' value='View Calendar'> </form>";
+
+/*
+* I need to have groupID availible from the php in the $row[0] to make it easier. From there I can insert the buttons into the innerHTML to include the buttons within the boxes of the users.
+* lmao also I don't know if I did this but looking at other people's calenders doesn't properly show their name, HEHE I FORGOT TO EDIT SOMETHING, NEVERMIND
+*/
+                         document.getElementById("displayGroupUsers").appendChild(individualUser);
+                        document.close();
+                        </script>
+                        <?php
                         echo "<form action='kick.php' method='post'>";
                           echo "<input type='hidden' value='".$_SESSION['groupID']."' name='groupID'>";
                           echo "<input type='hidden' value=$row[0] name='toBeKicked'>";

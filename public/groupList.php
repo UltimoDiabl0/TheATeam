@@ -22,6 +22,11 @@
       <a href="logout.php" style="float: right;">Log Out</a>
     </div>
 
+    <div class="groupCreate">
+      <a href="createGroup.php">Create a group</a>
+    </div>
+
+
     <?php
 
         try{
@@ -31,20 +36,6 @@
           $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           if (isset($_SESSION['username'])){
 
-            echo "<form action='logout.php' method='post' class='timeblockDevDisplay' >";
-              echo "<input type='submit' value='Logout'>";
-            echo "</form>";
-
-            echo "<form action='calendar.php' method='post' class='timeblockDevDisplay' >";
-              echo "<input type='submit' value='Go Back'>";
-            echo "</form>";
-
-            echo "<form action='createGroup.php' method='post' class='timeblockDevDisplay' >";
-              echo "<input type='submit' value='Create Group'>";
-            echo "</form>";
-
-
-        //    echo "<p>This is ".$_SESSION['username']."'s Invites </p>";
             echo "<h1> These are your invites </h1>";
             foreach ($dbh->query('CALL getInvites("'.$_SESSION['username'].'")') as $row) {
               ?>
@@ -52,6 +43,8 @@
               </div>
               <script>
               document.open();
+              // tempInviteArray[0] = Host User; tempInviteArray[1] = Current User; tempInviteArray[2] = GroupID;
+              // tempInviteArray[3] = Group Label; tempInviteArray[4] = Invite ID; tempInviteArray[5] = GroupName
               var tempInviteArray = <?php echo json_encode($row); ?>;
               var individualInvite = document.createElement('invite');
               individualInvite.style.width = "20%";
@@ -68,25 +61,7 @@
               document.close();
               </script>
               <?php
-              //  echo "<form action='denyInvite.php' method='post' class='timeblockDevDisplay' >";
-
-              //    echo "<p>Host User: $row[0],  Current User: $row[1], GroupID: $row[2], Group Label: $row[3] InviteID: $row[4]</p>";
-                //  echo "<input type='hidden' value=$row[4] name='inviteID'>";
-              //    echo "<input type='submit' value='Deny'>";
-
-            //    echo "</form>";
-
-            //    echo "<form action='acceptInvite.php' method='post' class='timeblockDevDisplay' >";
-
-            //      echo "<input type='hidden' value=$row[4] name='inviteID'>";
-            //      echo "<input type='hidden' value=$row[2] name='groupID'>";
-            //      echo "<input type='submit' value='Accept'>";
-
-          //      echo "</form>";
-
             }
-
-          //  echo "<p>This is ".$_SESSION['username']."'s Groups </p>";
             echo "<h1> These are your groups </h1>";
             foreach ($dbh->query('CALL getGroups("'.$_SESSION['username'].'")') as $row) {
               ?>
@@ -94,6 +69,8 @@
               </div>
               <script>
               document.open();
+              // tempGroupArray[0] = GroupID; tempGroupArray[1] = Current User; tempGroupArray[2] = isHost;
+              // tempGroupArray[3] = groupName; tempGroupArray[4] = groupType; tempGroupArray[5] = groupDesc;
                var tempGroupArray = <?php echo json_encode($row); ?>;
                console.log(tempGroupArray);
                var individualGroup = document.createElement('group');
@@ -111,20 +88,6 @@
               </script>
 
               <?php
-                 //echo "<form action='groupView.php' method='post' class='timeblockDevDisplay' >";
-                // echo "<p class='groupListDummy'>GroupID: $row[0],  Current User: $row[1], isHost: $row[2], groupName: $row[3], groupType: $row[4], groupDesc: $row[5]</p>";
-                //  echo "<input type='hidden' value=$row[0] name='groupID'>";
-                //  echo "<input type='hidden' value=$row[2] name='isHost'>";
-                //  echo "<input type='submit' value='Go To Group'>";
-
-                //  echo "</form>";
-                //  echo "<form action='leaveGroup.php' method='post' class='timeblockDevDisplay' >";
-                //  echo "<input type='hidden' value=$row[0] name='groupID'>";
-                //  echo "<input type='hidden' value=$row[2] name='isHost'>";
-                //  echo "<input type='submit' value='Leave Group'>";
-                //  echo "</form>";
-
-
             }
 
           }
@@ -138,10 +101,6 @@
               die();
           }
      ?>
-
-
-
-
 
          <script src="scripts/groupList.js"></script>
 

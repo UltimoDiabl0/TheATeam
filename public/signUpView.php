@@ -11,10 +11,10 @@ session_start();
 </head>
 
 <body>
+  <div class="indexCenter">
+    <img src="images/ThymerLogo.png"/>
+    <h1> New User? Sign up here! </h1>
 
-  <form action=index.php method='post'>
-    <input type='submit' value='Go Back'>
-  </form>
 
   <form action="signUp.php" method="post">
     <div class="userText">
@@ -47,7 +47,11 @@ session_start();
     </div>
 
   </form>
-
+  <h1> Already have an account? </h1>
+  <form action=index.php method='post'>
+    <input type='submit' value='Go Back'>
+  </form>
+</div>
 </body>
 
 </html>

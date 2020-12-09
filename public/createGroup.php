@@ -10,11 +10,16 @@
     <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
-
-  <form action='groupList.php' method='post' class='timeblockDevDisplay' >
-  <input type='submit' value='Go Back'>
-  </form>
-
+  <div class="navBar">
+    <a href="calendar.php">My Calendar</a>
+    <a href="groupList.php">My Groups</a>
+    <form action="searchUser.php" method='post'>
+      <input type="text" placeholder="Search..." name="searchbarInput">
+    </form>
+    <a href="logout.php" style="float: right;">Log Out</a>
+  </div>
+  <div class="indexCenter">
+    <h1> Create a group! </h1>
    <form action='createGroupDB.php' method='post'>
      <input type='text' name='groupName' placeholder='Group Name'>
      <input type='text' name='groupType' placeholder='Group Type'>
@@ -31,6 +36,6 @@
 
    ?>
 
-
+</div>
 </body>
 </html>

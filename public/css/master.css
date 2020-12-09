@@ -1,12 +1,36 @@
+ body {
+  background-color: #A9A9A9;
+}
+
+
 .lsButtons {
   display: flex;
   justify-content: space-between;
   margin-top: 0.5em;
 }
 
+.lsButtons a {
+text-decoration: none;
+color: black;
+border-color: black;
+border-radius: 4px;
+background-color: white;
+padding: 3px;
+}
+
+.usertext {
+  margin: auto;
+}
+
 .userText input {
   display: block;
   width: 100%;
+}
+.indexCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 form {
@@ -89,6 +113,7 @@ form {
 .navBar {
   background-color: #080808;
   overflow: hidden;
+  max-height: 50px;
 
 }
 .navBar a {
@@ -123,4 +148,27 @@ form {
 .navBar a:hover {
   background-color:#a9a9a9;
   color: white;
+}
+/*
+* Group List
+*/
+.groupCreate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+.groupCreate a {
+  margin-top: .5em;
+  text-decoration: none;
+
+  color: black;
+  border-color: black;
+  border-radius: 4px;
+  background-color: white;
+  padding: 3px;
+  font-size: 25px;
 }

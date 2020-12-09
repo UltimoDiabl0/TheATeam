@@ -14,6 +14,9 @@
 
 <body>
 
+  <div class="indexCenter">
+    <img src="images/ThymerLogo.png"/>
+
   <form action="login.php" method="post">
     <div class="userText">
       <input type="text" name="username" placeholder="Username">
@@ -39,7 +42,7 @@
       <a href="signUpView.php">Sign Up</a>
     </div>
   </form>
-
+</div>
 </body>
 
 </html>

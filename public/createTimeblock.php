@@ -10,10 +10,17 @@
   <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
+  <div class="navBar">
+    <a href="calendar.php">My Calendar</a>
+    <a href="groupList.php">My Groups</a>
+    <form action="searchUser.php" method='post'>
+      <input type="text" placeholder="Search..." name="searchbarInput">
+    </form>
+    <a href="logout.php" style="float: right;">Log Out</a>
+  </div>
 
-  <form action='calendar.php' method='post' class='timeblockDevDisplay' >
-  <input type='submit' value='Go Back'>
-  </form>
+  <div class="indexCenter">
+
 
    <form action='createTimeblockDB.php' method='post'>
      Start Time:
@@ -36,6 +43,6 @@
      <input type='submit' value='Create Timeblock'>
    </form>
 
-
+</div>
 </body>
 </html>
